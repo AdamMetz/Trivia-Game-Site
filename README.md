@@ -1,4 +1,18 @@
-# Trivia-Game-Site
+# Trivia Game Site (Team Data ENSE 374 Project)
+
+## Group Members
+
+- Taishi Barth
+- Quinn Maloney
+- Adam Metz
+
+## Project idea
+
+## Project background/Business Opportunity
+
+## Vlogs
+
+## License
 
 Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
