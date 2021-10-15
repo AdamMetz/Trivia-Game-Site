@@ -16,6 +16,7 @@ When we were brainstorming ideas for this project, the one we came across that w
 ## Vlogs
 
 Vlog#1: https://www.youtube.com/watch?v=RRaXSFq1IZY
+Vlog#2: https://www.youtube.com/watch?v=VBEQMTZHA28
 
 ## License
 
