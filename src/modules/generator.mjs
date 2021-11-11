@@ -3,7 +3,7 @@ const questionGenerators = {
     subtraction: generateSubtraction,
     multiplication: generateMultiplication,
     division: generateDivision
-}
+};
 
 function generateQuestions(options) {
     const numberOfQuestions = 10
@@ -11,9 +11,10 @@ function generateQuestions(options) {
 
     for (let i = 0; i < numberOfQuestions; i++) {
         questions[i] = new Object();
+        const question = questions[i];
         const arithmeticOperation = options[randomInteger(0, options.length)];
-        questions[i].arithmeticOperation = arithmeticOperation;
-        ({text: questions[i].text, answer: questions[i].answer} = questionGenerators[arithmeticOperation]());
+        question.arithmeticOperation = arithmeticOperation;
+        ({ text: question.text, answer: question.answer } = questionGenerators[arithmeticOperation]());
     }
 
     return questions;
