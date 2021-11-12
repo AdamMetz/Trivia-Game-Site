@@ -5,6 +5,20 @@ const questionGenerators = {
     division: generateDivision
 };
 
+// Generates 10 mathematical questions based on the specified options
+//
+// The options object is laid out as follows:
+// grade: integer representing the grade level of difficulty
+// operations: array of strings representing an arithmetic operation
+// Valid strings include "addition", "subtraction", "multiplication", and "division"
+//
+// The return object is laid out as follows:
+// grade: integer representing the grade level of difficulty
+// Identical to the one passed in as an options
+// questions: array of objects which include:
+//     arithmeticOperation: string representing an arithmetic operation
+//     text: string representing the question
+//     answer: integer representing the correct answer
 function generateQuestions(options) {
     const operations = options.operations;
     const grade = options.grade;
