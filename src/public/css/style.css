@@ -287,7 +287,7 @@ input[type=radio]:checked + .grade-button{
     fill: #98838F33;
 }
 
-input[type=radio]:checked + .operation-button{
+input[type=checkbox]:checked + .operation-button{
     fill: #16E0BD33;
 }
 
@@ -424,4 +424,187 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+
+/* PROFILE PAGE */
+
+.profile-container{
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows:repeat(20, 1fr);
+    gap: 10px;
+
+    grid-column: 2/12;
+    grid-row: 3/9;
+    background-color: #FFFFFF;
+    border: #98838F;
+    border-radius: 1vw;
+    border-width: 1vw;
+    border-style: solid;
+
+    height: 78vh;
+}
+
+#profile-user-text{
+    grid-row: 1;
+    grid-column: 1/15;
+    max-height: 5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 5vh;
+    color: #78C3FB;
+    padding-left: 1vw;
+}
+
+#game-history-text{
+    grid-row: 2;
+    grid-column: 1/15;
+    max-height: 4vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4vh;
+    color: #16E0BD;
+    padding-left: 1vw;
+}
+
+#game-history-item-1{
+    grid-column: 2/19;
+    grid-row: 4/5;
+}
+
+#game-history-item-2{
+    grid-column: 2/19;
+    grid-row: 6/7;
+}
+
+#game-history-item-3{
+    grid-column: 2/19;
+    grid-row: 8/9;
+}
+
+#game-history-item-4{
+    grid-column: 2/19;
+    grid-row: 10/11;
+}
+
+#next-page{
+    grid-row: 12;
+    grid-column: 9/13;
+}
+
+#next-page > span {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: light;
+    font-size: 4vh;
+    color: #78C3FB;
+}
+
+#next-page-left-arrow:hover {
+    cursor: pointer;
+}
+
+#next-page-right-arrow:hover {
+    cursor: pointer;
+}
+
+/* COMPLETED GAME PAGE */
+
+.completed-game-container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows:repeat(13, 1fr);
+
+
+    grid-column: 2/12;
+    grid-row: 3/9;
+    background-color: #FFFFFF;
+    border: #98838F;
+    border-radius: 1vw;
+    border-width: 1vw;
+    border-style: solid;
+
+    height: 78vh;
+}
+
+#questions-complete{
+    grid-column: 1/7;
+    grid-row: 1;
+
+    max-height: 3.5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3.5vh;
+    color: #78C3FB;
+    padding-left: 1vw;
+    padding-top: 0.75vh;
+}
+
+#game-complete-timer{
+    grid-row: 1;
+    grid-column: 6/12;
+    text-align: right;
+    padding-top: 0.75vh;
+}
+
+#display-complete-score {
+    grid-column: 1/12;
+    grid-row: 3;
+
+    text-align: center;
+
+    max-height: 3.5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3.5vh;
+    color: #78C3FB;
+    padding-left: 1vw;
+    padding-top: 0.75vh;
+}
+
+#score-colour{
+    color: #16E0BD;
+}
+
+#review-questions {
+    grid-column: 1/12;
+    grid-row: 4;
+
+    text-align: center;
+
+    max-height: 3.5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3.5vh;
+    color: #78C3FB;
+    padding-left: 1vw;
+    padding-top: 0.75vh;
+}
+
+.review-questions-icon{grid-row: 5;}
+#review-questions-icon-1{grid-column: 2;}
+#review-questions-icon-2{grid-column: 3;}
+#review-questions-icon-3{grid-column: 4;}
+#review-questions-icon-4{grid-column: 5;}
+#review-questions-icon-5{grid-column: 6;}
+#review-questions-icon-6{grid-column: 7;}
+#review-questions-icon-7{grid-column: 8;}
+#review-questions-icon-8{grid-column: 9;}
+#review-questions-icon-9{grid-column: 10;}
+#review-questions-icon-10{grid-column: 11;}
+
+.review-questions-icon:hover{
+    cursor: pointer;
+}
+
+#review-question{
+    grid-column: 2/12;
+    justify-self: center;
+    grid-row:7/11;
 }

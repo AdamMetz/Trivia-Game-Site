@@ -1,100 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<div class = "navbar-container">
 
-    <div class = "navbar-container">
+    <div id = "title">
+        <span id = "title-math">Math</span><span id = "title-blitz">Blitz</span>
+    </div>
+    <form id="home-button" action="/" method="GET" >
+        <!-- Bit of a weird way to turn an SVG into a submit button. Nesting a submit button and SVG into a label, then hiding the submit button. -->
+        <label>
+            <input type="submit" style="display: none;">
+            <div>
+                <!-- Exported SVG from Adobe XD artboard -->
+                <svg id="home-button-box" fill="#fff" xmlns="http://www.w3.org/2000/svg" width="137" height="99" viewBox="0 0 137 99">
+                    <path d="M0,0H137V99H0Z" />
+                    <text transform="translate(24 60)" fill="#707070" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Home</tspan></text>
+                </svg>              
+            </div>
+        </label>
+    </form>
 
-        <div id = "title">
-            <span id = "title-math">Math</span><span id = "title-blitz">Blitz</span>
-        </div>
-        <form id="home-button" action="/" method="GET" >
+    <% if (logged_in) { %>
+        
+
+        <form id="logout-button" action="/" method="GET" >
             <!-- Bit of a weird way to turn an SVG into a submit button. Nesting a submit button and SVG into a label, then hiding the submit button. -->
             <label>
                 <input type="submit" style="display: none;">
                 <div>
-                    <!-- Exported SVG from Adobe XD artboard -->
-                    <svg id="home-button-box" fill="#fff" xmlns="http://www.w3.org/2000/svg" width="137" height="99" viewBox="0 0 137 99">
-                        <path d="M0,0H137V99H0Z" />
-                        <text transform="translate(24 60)" fill="#707070" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Home</tspan></text>
+                    <svg class="logout-button-svg" fill="none" xmlns="http://www.w3.org/2000/svg" width="188" height="53" viewBox="0 0 188 53">
+                        <g stroke="#78c3fb" stroke-width="3">
+                        <rect width="188" height="53" rx="26.5" stroke="none"/>
+                        <rect x="1.5" y="1.5" width="185" height="50" rx="25" fill="none"/>
+                        </g>
+                        <text class="logout-button-svg-text" transform="translate(40 37)" fill="#78c3fb" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Logout</tspan></text>
                     </svg>              
                 </div>
             </label>
         </form>
 
-        <% if (logged_in) { %>
-            
+        <form id="profile-button" action="/profile" method="GET" >
+            <!-- Bit of a weird way to turn an SVG into a submit button. Nesting a submit button and SVG into a label, then hiding the submit button. -->
+            <label>
+                <input type="submit" style="display: none;">
+                <div>
+                    <!-- Exported SVG from Adobe XD artboard -->
+                    <svg id="profile-button-box" fill="#fff" xmlns="http://www.w3.org/2000/svg" width="137" height="99" viewBox="0 0 137 99">
+                        <path d="M0,0H137V99H0Z"/>
+                        <text transform="translate(24 60)" fill="#707070" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Profile</tspan></text>
+                    </svg>
+                </div>
+            </label>
+        </form>
 
-            <form id="logout-button" action="/" method="GET" >
-                <!-- Bit of a weird way to turn an SVG into a submit button. Nesting a submit button and SVG into a label, then hiding the submit button. -->
-                <label>
-                    <input type="submit" style="display: none;">
-                    <div>
-                        <svg class="logout-button-svg" fill="none" xmlns="http://www.w3.org/2000/svg" width="188" height="53" viewBox="0 0 188 53">
-                            <g stroke="#78c3fb" stroke-width="3">
-                            <rect width="188" height="53" rx="26.5" stroke="none"/>
-                            <rect x="1.5" y="1.5" width="185" height="50" rx="25" fill="none"/>
-                            </g>
-                            <text class="logout-button-svg-text" transform="translate(40 37)" fill="#78c3fb" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Logout</tspan></text>
-                        </svg>              
-                    </div>
-                </label>
-            </form>
-
-            <form id="profile-button" action="/profile" method="GET" >
-                <!-- Bit of a weird way to turn an SVG into a submit button. Nesting a submit button and SVG into a label, then hiding the submit button. -->
-                <label>
-                    <input type="submit" style="display: none;">
-                    <div>
-                        <!-- Exported SVG from Adobe XD artboard -->
-                        <svg id="profile-button-box" fill="#fff" xmlns="http://www.w3.org/2000/svg" width="137" height="99" viewBox="0 0 137 99">
-                            <path d="M0,0H137V99H0Z"/>
-                            <text transform="translate(24 60)" fill="#707070" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Profile</tspan></text>
-                        </svg>
-                    </div>
-                </label>
-            </form>
-
-        <% } else { %>
-            <form id="login-button" action="/login" method="GET">
-                <label>
-                    <input type="submit" style="display: none;">
-                    <div>
-                        <!-- Exported SVG from Adobe XD artboard -->
-                        <svg class="login-button-svg" fill="none" xmlns="http://www.w3.org/2000/svg" width="165" height="53" viewBox="0 0 165 53">
-                            <g stroke="#78c3fb" stroke-width="3">
-                              <rect width="165" height="53" rx="26.5" stroke="none"/>
-                              <rect x="1.5" y="1.5" width="162" height="50" rx="25" fill="none"/>
-                            </g>
-                            <text class="login-button-svg-text" transform="translate(40 37)" fill="#78c3fb" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Login</tspan></text>
-                        </svg>              
-                    </div>
-                </label>
-            </form>
-            
-            <form id="signup-button" action="/signup" method="GET">
-                <label>
-                    <input type="submit" style="display: none;">
-                    <div>
-                        <!-- Exported SVG from Adobe XD artboard -->
-                        <svg class="signup-button-svg" xmlns="http://www.w3.org/2000/svg" fill="none" width="191" height="53" viewBox="0 0 191 53">
-                            <g stroke="#78c3fb" stroke-width="3">
-                              <rect width="191" height="53" rx="26.5" stroke="none"/>
-                              <rect x="1.5" y="1.5" width="188" height="50" rx="25" fill="none"/>
-                            </g>
-                            <text class="signup-button-svg-text" transform="translate(41 37)" fill="#78c3fb" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Sign Up</tspan></text>
-                        </svg>              
-                    </div>
-                </label>
-            </form>
-        <% } %>
+    <% } else { %>
+        <form id="login-button" action="/login" method="GET">
+            <label>
+                <input type="submit" style="display: none;">
+                <div>
+                    <!-- Exported SVG from Adobe XD artboard -->
+                    <svg class="login-button-svg" fill="none" xmlns="http://www.w3.org/2000/svg" width="165" height="53" viewBox="0 0 165 53">
+                        <g stroke="#78c3fb" stroke-width="3">
+                            <rect width="165" height="53" rx="26.5" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="162" height="50" rx="25" fill="none"/>
+                        </g>
+                        <text class="login-button-svg-text" transform="translate(40 37)" fill="#78c3fb" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Login</tspan></text>
+                    </svg>              
+                </div>
+            </label>
+        </form>
         
-    </div>
-
-</body>
-</html>
+        <form id="signup-button" action="/signup" method="GET">
+            <label>
+                <input type="submit" style="display: none;">
+                <div>
+                    <!-- Exported SVG from Adobe XD artboard -->
+                    <svg class="signup-button-svg" xmlns="http://www.w3.org/2000/svg" fill="none" width="191" height="53" viewBox="0 0 191 53">
+                        <g stroke="#78c3fb" stroke-width="3">
+                            <rect width="191" height="53" rx="26.5" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="188" height="50" rx="25" fill="none"/>
+                        </g>
+                        <text class="signup-button-svg-text" transform="translate(41 37)" fill="#78c3fb" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Sign Up</tspan></text>
+                    </svg>              
+                </div>
+            </label>
+        </form>
+    <% } %>
+</div>

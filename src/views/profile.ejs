@@ -9,5 +9,51 @@
 </head>
 <body>
     <%- include("partials/navbar") -%>
+    <div class="page-container">
+        <div class="profile-container">
+
+            <div id="profile-user-text">
+                <span>Hello, </span><span><%=username%></span>
+            </div>
+
+            <div id="game-history-text">
+                <span>Game History:</span>
+            </div>
+
+            <% var i = 0; var page = 1; var max_page = 4; %>
+            <% for (let j = 0; j <= i+3 || j <= 10; j++) { %>
+                <div id="game-history-item-<%=((j%4)+1)%>">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1396" height="120" viewBox="0 0 1396 126">
+                        <g>
+                        <g fill="#fff" stroke="#707070" stroke-width="5">
+                            <rect width="1396" height="126" stroke="none"/>
+                            <rect x="2.5" y="2.5" width="1391" height="121" fill="none"/>
+                        </g>
+                            <text transform="translate(29 95)" fill="#16e0bd" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Time Taken: </tspan><tspan y="0" fill="#98838f"><%=time_taken%></tspan></text>
+                            <text transform="translate(29 52)" fill="#16e0bd" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Question Types:</tspan><tspan y="0" font-family="Poppins-Bold, Poppins" font-weight="700"> </tspan><tspan y="0" fill="#98838f"><%=operations_list%></tspan><tspan y="0" font-family="Poppins-Bold, Poppins" font-weight="700"> </tspan></text>
+                            <text transform="translate(1012 52)" fill="#16e0bd" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Score: </tspan><tspan y="0" fill="#98838f"> <%=score%> </tspan><tspan y="0"></tspan></text>
+                            <text transform="translate(1012 95)" fill="#16e0bd" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Date: </tspan><tspan y="0" fill="#98838f"><%=date%></tspan></text>
+                        </g>
+                        <text transform="translate(661 95)" fill="#16e0bd" font-size="30" font-family="Poppins-Light, Poppins" font-weight="300"><tspan x="0" y="0">Grade Level: </tspan><tspan y="0" xml:space="preserve" fill="#98838f"><%=grade%></tspan></text>
+                    </svg>
+                </div>
+            <% } %>
+
+            <div id="next-page">
+                <% if(i === 0){ %>
+                    <svg id="next-page-left-arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="37" viewBox="0 0 36 37">
+                        <path d="M18.5,0,37,36H0Z" transform="translate(0 37) rotate(-90)" fill="#98838f"/>
+                    </svg>
+                <% } %>
+                <span style="padding-left: 0.4vw;">Page </span> <span><%=page%> </span> <span>/</span> <span><%=max_page%> </span>
+                <% if(i === 0){ %>
+                    <svg id="next-page-right-arrow" xmlns="http://www.w3.org/2000/svg" width="36" height="37" viewBox="0 0 36 37">
+                        <path d="M18.5,0,37,36H0Z" transform="translate(36) rotate(90)" fill="#98838f"/>
+                    </svg>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
 </body>
 </html>
