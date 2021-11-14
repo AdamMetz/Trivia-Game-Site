@@ -1,0 +1,427 @@
+
+html, body {
+    background-color: #78C3FB;
+    height: 100%;
+    margin: 0 0 0 0;
+}
+
+/* NAVBAR */
+
+.navbar-container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
+    background-color: #FFFFFF;
+    height: 10.2vh;
+}
+
+.navbar-container > #title {
+    grid-column: 1/4;
+    grid-row: 1;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 35px;
+    float: left;
+    padding-top: 2.25vh;
+    padding-left: 3vw;
+}
+
+.navbar-container > #title > #title-math {
+    display: inline;
+    color: #98CE00;
+}
+
+.navbar-container > #title > #title-blitz {
+    display: inline;
+    color: #16E0BD;
+}
+
+.navbar-container > #home-button{
+    grid-column: 4;
+    grid-row: 1;
+}
+
+#home-button-box:hover > path{
+    fill:#98838F;
+    opacity: 20%;
+}
+#home-button-box:hover{
+    cursor:pointer;
+}
+
+.navbar-container > #profile-button{
+    grid-column: 6;
+    grid-row: 1;
+}
+
+#profile-button-box:hover > path{
+    fill:#98838F;
+    opacity: 20%;
+}
+#profile-button-box:hover{
+    cursor:pointer;
+}
+
+.navbar-container > #login-button{
+    grid-column: 11;
+    padding-top: 2vh;
+}
+
+.login-button-svg:hover {
+    fill: #78C3FB;
+    cursor:pointer;
+}
+.login-button-svg:hover > .login-button-svg-text {
+    fill: #FFFFFF;
+}
+
+.navbar-container > #signup-button{
+    grid-column: 12;
+    padding-right: 2vw;
+    padding-top: 2vh;
+}
+
+.signup-button-svg:hover {
+    fill: #78C3FB;
+    cursor:pointer;
+}
+.signup-button-svg:hover > .signup-button-svg-text {
+    fill: #FFFFFF;
+}
+
+.navbar-container > #logout-button{
+    grid-column: 12;
+    padding-right: 2vw;
+    padding-top: 2vh;
+}
+
+.logout-button-svg:hover {
+    fill: #78C3FB;
+    cursor:pointer;
+}
+.logout-button-svg:hover > .logout-button-svg-text {
+    fill: #FFFFFF;
+}
+
+/* Grid container for all pages */
+
+.page-container{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+/* LOGIN PAGE*/
+
+.login-container{
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 20px;
+
+    grid-column: 4/10;
+    grid-row: 3/9;
+    background-color: #FFFFFF;
+    border: #98838F;
+    border-radius: 1vw;
+    border-width: 1vw;
+    border-style: solid;
+}
+
+.login-container > #login-text {
+    grid-column: 7;
+    max-height: 6vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 6vh;
+    color: #78C3FB;
+}
+
+.login-container > #login-form {
+    grid-column: 2/13;
+    grid-row: 2;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: light;
+    font-size: 3vh;
+    color: #78C3FB;
+}
+
+.form-input {
+    width: 100%;
+    font-size: 2.75vh;
+    padding:10px;
+    border-radius:10px;
+}
+
+#login-submit-button {
+    padding-left: 12vw;
+    padding-right: 12vw;
+}
+
+.login-submit-button-svg:hover {
+    fill: #16E0BD;
+    cursor:pointer;
+}
+.login-submit-button-svg:hover > .login-submit-button-svg-text {
+    fill: #FFFFFF;
+}
+
+/* SIGNUP PAGE*/
+
+.signup-container{
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 20px;
+
+    grid-column: 4/10;
+    grid-row: 3/9;
+    background-color: #FFFFFF;
+    border: #98838F;
+    border-radius: 1vw;
+    border-width: 1vw;
+    border-style: solid;
+}
+
+.signup-container > #signup-text {
+    grid-column: 6/12;
+    max-height: 6vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 6vh;
+    color: #78C3FB;
+}
+
+.signup-container > #signup-form {
+    grid-column: 2/13;
+    grid-row: 2;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: light;
+    font-size: 3vh;
+    color: #78C3FB;
+}
+
+#signup-submit-button {
+    padding-left: 12vw;
+    padding-right: 12vw;
+}
+
+.signup-submit-button-svg:hover {
+    fill: #16E0BD;
+    cursor:pointer;
+}
+.signup-submit-button-svg:hover > .signup-submit-button-svg-text {
+    fill: #FFFFFF;
+}
+
+/* HOME PAGE */
+
+.main-container{
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows:repeat(7, 1fr);
+    gap: 20px;
+
+    grid-column: 2/12;
+    grid-row: 3/9;
+    background-color: #FFFFFF;
+    border: #98838F;
+    border-radius: 1vw;
+    border-width: 1vw;
+    border-style: solid;
+
+    height: 78vh;
+}
+
+#choose-grade-text{
+    grid-column: 1/20;
+    grid-row: 1;
+    max-height: 4.5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4.5vh;
+    color: #78C3FB;
+    padding-left: 1vw;
+}
+
+#grade-button-1{grid-row:2; grid-column: 2/4;}
+#grade-button-2{grid-row:2; grid-column: 5/7;}
+#grade-button-3{grid-row:2; grid-column: 8/10;}
+#grade-button-4{grid-row:2; grid-column: 11/13;}
+#grade-button-5{grid-row:3; grid-column: 2/4;}
+#grade-button-6{grid-row:3; grid-column: 5/7;}
+#grade-button-7{grid-row:3; grid-column: 8/10;}
+#grade-button-8{grid-row:3; grid-column: 11/13;}
+
+.grade-button:hover{
+    fill: #98838F33;
+}
+
+input[type=radio]:checked + .grade-button{
+    fill: #16E0BD33;
+}
+
+#question-type-text{
+    grid-column: 1/20;
+    grid-row: 4;
+    max-height: 4.5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4.5vh;
+    color: #78C3FB;
+    padding-left: 1vw;
+}
+
+#addition-button{grid-row:5; grid-column: 2/5;}
+#subtraction-button{grid-row:5; grid-column: 6/9;}
+#multiplication-button{grid-row:6; grid-column: 2/6;}
+#division-button{grid-row:6; grid-column: 7/9;}
+
+.operation-button:hover{
+    fill: #98838F33;
+}
+
+input[type=radio]:checked + .operation-button{
+    fill: #16E0BD33;
+}
+
+#begin-button{
+    grid-column: 16/20;
+    grid-row: 9;
+    padding-bottom: 1vw;
+}
+
+.begin-button-svg:hover{
+    fill: #98838F33;
+}
+
+.begin-button-svg:focus{
+    fill: #16E0BD33;
+}
+
+/*IN GAME PAGE*/
+
+.in-game-container{
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows:repeat(15, 1fr);
+
+    grid-column: 2/12;
+    grid-row: 3/9;
+    background-color: #FFFFFF;
+    border: #98838F;
+    border-radius: 1vw;
+    border-width: 1vw;
+    border-style: solid;
+
+    height: 55vh;
+}
+
+#question-number{
+    grid-column: 1/5;
+    grid-row: 1;
+
+    max-height: 3.5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3.5vh;
+    color: #78C3FB;
+    padding-left: 1vw;
+    padding-top: 0.75vh;
+}
+
+#timer{
+    grid-row: 1;
+    grid-column: 10/20;
+    text-align: right;
+    padding-top: 0.75vh;
+    padding-right: 1vw;
+}
+
+#timer-header{
+    max-height: 3.5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 3.5vh;
+    color: #78C3FB;
+    padding-left: 1vw;
+    padding-top: 0.75vh;
+}
+
+.timer-value{
+    max-height: 3.5vh;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: light;
+    font-size: 3.5vh;
+    color: #000000;
+    padding-left: 1vw;
+}
+
+#line{
+    grid-column: 1/15;
+    grid-row: 2;
+}
+
+#in-game-question{
+
+    grid-row: 7;
+    grid-column: 8/15;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: light;
+    font-size: 6vh;
+    color: #000000;
+}
+
+#in-game-question{
+
+    grid-row: 8;
+    grid-column: 8/15;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: light;
+    font-size: 6vh;
+    color: #000000;
+}
+
+#in-game-question > .form-input {
+    width: 8vw;
+    height: 6vh;
+    font-size: 6vh;
+    margin-left: 1vw;
+}
+
+#next-question-button{
+    grid-row: 15;
+    grid-column: 15/20;
+}
+
+#next-question-button:hover > svg{
+    fill: #98838F33;
+    cursor: pointer;
+}
+
+/* Hiding arrows from HTML number input*/
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

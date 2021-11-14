@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>In Game</title>
+</head>
+<body>
+    <%- include("partials/navbar") -%>
+
+    <div class="page-container">
+        <form class="in-game-container" action="">
+            <div id="question-number">
+                <span>Question: </span><%=curr_question_num%><span><span>/</span></span><span><%=question_set_size%></span>
+            </div>
+            
+            <div id="timer">
+                <span id="timer-header">Time Passed: </span><span class="timer-value">13</span><span class="timer-value">minutes</span><span class="timer-value">24</span><span class="timer-value">seconds</span>
+            </div>
+
+            <div id="line">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1550" height="1" viewBox="0 0 1550 1">
+                    <line x1="10" x2="1595" transform="translate(0 0.5)" fill="none" stroke="#707070" stroke-width="1"/>
+                </svg>                  
+            </div>
+
+            <div id="in-game-question">
+                <label for="answer">9 + 10 =</label><input class="form-input" type="number" name="answer">
+            </div>
+
+            <label id="next-question-button">
+                <input type="submit" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="459" height="100" viewBox="0 0 459 100">
+                    <g stroke="#707070" stroke-width="5">
+                        <rect width="459" height="100" rx="25" stroke="none"/>
+                        <rect x="2.5" y="2.5" width="454" height="95" rx="22.5" fill="none"/>
+                    </g>
+                    <text transform="translate(49 68)" fill="#98ce00" font-size="50" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0">Next Question</tspan></text>
+                </svg>
+            </label>
+            
+            
+        </form>
+    </div>
+
+</body>
+</html>

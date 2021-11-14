@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Home</title>
+</head>
+<body>
+    <%- include("partials/navbar") -%>
+
+    <div class = "page-container">
+            <form class="main-container" action="/ingame" method="GET">
+
+                <!--Grade Selections-->
+                <span id="choose-grade-text">Choose Your Grade Level</span>
+                <label id="grade-button-1">
+                    <input type="radio" name="grade-selection" style="display: none;" value="1">
+                    <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
+                        <g>
+                        <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
+                            <rect width="214" height="60" rx="30" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="211" height="57" rx="28.5" fill="none"/>
+                        </g>
+                        </g>
+                        <text  transform="translate(51 41)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Grade 1</tspan></text>
+                    </svg>
+                </label>
+                <label id="grade-button-2">
+                    <input type="radio" name="grade-selection" style="display: none;" value="2">
+                    <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
+                        <g>
+                        <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
+                            <rect width="214" height="60" rx="30" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="211" height="57" rx="28.5" fill="none"/>
+                        </g>
+                        </g>
+                        <text  transform="translate(51 41)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Grade 2</tspan></text>
+                    </svg>
+                </label>
+                <label id="grade-button-3">
+                    <input type="radio" name="grade-selection" style="display: none;" value="3">
+                    <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
+                        <g>
+                        <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
+                            <rect width="214" height="60" rx="30" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="211" height="57" rx="28.5" fill="none"/>
+                        </g>
+                        </g>
+                        <text  transform="translate(51 41)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Grade 3</tspan></text>
+                    </svg>
+                </label>
+                <label id="grade-button-4">
+                    <input type="radio" name="grade-selection" style="display: none;" value="4">
+                    <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
+                        <g>
+                        <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
+                            <rect width="214" height="60" rx="30" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="211" height="57" rx="28.5" fill="none"/>
+                        </g>
+                        </g>
+                        <text  transform="translate(51 41)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Grade 4</tspan></text>
+                    </svg>
+                </label>
+                <label id="grade-button-5">
+                    <input type="radio" name="grade-selection" style="display: none;" value="5">
+                    <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
+                        <g>
+                        <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
+                            <rect width="214" height="60" rx="30" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="211" height="57" rx="28.5" fill="none"/>
+                        </g>
+                        </g>
+                        <text  transform="translate(51 41)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Grade 5</tspan></text>
+                    </svg>
+                </label>
+                <label id="grade-button-6">
+                    <input type="radio" name="grade-selection" style="display: none;" value="6">
+                    <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
+                        <g>
+                        <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
+                            <rect width="214" height="60" rx="30" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="211" height="57" rx="28.5" fill="none"/>
+                        </g>
+                        </g>
+                        <text  transform="translate(51 41)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Grade 6</tspan></text>
+                    </svg>
+                </label>
+                <label id="grade-button-7">
+                    <input type="radio" name="grade-selection" style="display: none;" value="7">
+                    <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
+                        <g>
+                        <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
+                            <rect width="214" height="60" rx="30" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="211" height="57" rx="28.5" fill="none"/>
+                        </g>
+                        </g>
+                        <text  transform="translate(51 41)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Grade 7</tspan></text>
+                    </svg>
+                </label>
+                <label id="grade-button-8">
+                    <input type="radio" name="grade-selection" style="display: none;" value="8">
+                    <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
+                        <g>
+                        <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
+                            <rect width="214" height="60" rx="30" stroke="none"/>
+                            <rect x="1.5" y="1.5" width="211" height="57" rx="28.5" fill="none"/>
+                        </g>
+                        </g>
+                        <text  transform="translate(51 41)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Grade 8</tspan></text>
+                    </svg>
+                </label>
+                
+                <!--Question Type Selections-->
+                <span id="question-type-text">Select Question Types</span>
+                <label id="addition-button">
+                    <input type="radio" name="operation-selection" style="display: none;" value="addition">
+                    <svg class="operation-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="249" height="84" viewBox="0 0 249 84">
+                        <g stroke="#675656" stroke-width="4">
+                          <rect width="249" height="84" stroke="none"/>
+                          <rect x="2" y="2" width="245" height="80" fill="none"/>
+                        </g>
+                        <text transform="translate(16 52)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Addition </tspan></text>
+                        <line y2="71" transform="translate(176 6)" fill="none" stroke="#675656" stroke-width="1"/>
+                        <text transform="translate(195 63)" fill="#98ce00" font-size="60" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0">+</tspan></text>
+                    </svg>
+                </label>
+                <label id="subtraction-button">
+                    <input type="radio" name="operation-selection" style="display: none;" value="subtraction">
+                    <svg class="operation-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="304" height="84" viewBox="0 0 304 84">
+                        <g stroke="#675656" stroke-width="4">
+                          <rect width="304" height="84" stroke="none"/>
+                          <rect x="2" y="2" width="300" height="80" fill="none"/>
+                        </g>
+                        <text transform="translate(16 52)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Subtraction</tspan></text>
+                        <line y2="71" transform="translate(232 6)" fill="none" stroke="#675656" stroke-width="1"/>
+                        <text transform="translate(253 63)" fill="#98ce00" font-size="60" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0">-</tspan></text>
+                    </svg>                      
+                </label>
+                <label id="multiplication-button">
+                    <input type="radio" name="operation-selection" style="display: none;" value="multiplication">
+                    <svg class="operation-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="321" height="84" viewBox="0 0 321 84">
+                        <g stroke="#675656" stroke-width="4">
+                          <rect width="321" height="84" stroke="none"/>
+                          <rect x="2" y="2" width="317" height="80" fill="none"/>
+                        </g>
+                        <text transform="translate(16 52.391)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Multiplication</tspan></text>
+                        <line y2="66" transform="translate(257 9)" fill="none" stroke="#675656" stroke-width="1"/>
+                        <text transform="translate(270 63)" fill="#98ce00" font-size="60" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0">x</tspan></text>
+                      </svg>                  
+                </label>
+                <label id="division-button">
+                    <input type="radio" name="operation-selection" style="display: none;" value="division">
+                    <svg class="operation-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="231" height="84" viewBox="0 0 231 84">
+                        <g stroke="#675656" stroke-width="4">
+                          <rect width="231" height="84" stroke="none"/>
+                          <rect x="2" y="2" width="227" height="80" fill="none"/>
+                        </g>
+                        <text transform="translate(16 52.391)" fill="#98ce00" font-size="30" font-family="Poppins-Black, Poppins" font-weight="800"><tspan x="0" y="0">Division</tspan></text>
+                        <line y2="66" transform="translate(164 9)" fill="none" stroke="#675656" stroke-width="1"/>
+                        <text transform="translate(178 63)" fill="#98ce00" font-size="60" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0">÷</tspan></text>
+                    </svg>              
+                </label>
+
+                <!--Submit/begin button-->
+                <label id="begin-button">
+                    <input type="submit" style="display:none">
+                    <svg class="begin-button-svg" fill="#fff" xmlns="http://www.w3.org/2000/svg" width="326" height="100" viewBox="0 0 326 100">
+                        <g stroke="#707070" stroke-width="5">
+                          <rect width="326" height="100" rx="25" stroke="none"/>
+                          <rect x="2.5" y="2.5" width="321" height="95" rx="22.5" fill="none"/>
+                        </g>
+                        <text transform="translate(80 68)" fill="#98ce00" font-size="50" font-family="Poppins-Bold, Poppins" font-weight="700"><tspan x="0" y="0">Begin!</tspan></text>
+                    </svg>
+                </label>
+                
+            </form>
+    </div>
+
+</body>
+</html>
