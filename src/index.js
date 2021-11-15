@@ -1,9 +1,43 @@
-const express = require ( "express" );
+import express from 'express';
 const app = express(); 
 
-app.use(express.static(__dirname +"/public"));
-app.use(express.urlencoded({ extended: true})); 
-app.set('views', __dirname + '/views');
+app.use(express.urlencoded({ extended: false})); 
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+
+import mongoose from 'mongoose';
+mongoose.connect( "mongodb://localhost:27017/MathBlitz", 
+                { useNewUrlParser: true, 
+                  useUnifiedTopology: true});
+
+import session from 'express-session'
+import passport from 'passport'
+import passportLocalMongoose from 'passport-local-mongoose'
+import dotenv from 'dotenv'
+dotenv.config();
+
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use (passport.initialize());
+app.use (passport.session());
+
+const userSchema = new mongoose.Schema ({
+    username: String,
+    password: String
+})
+
+userSchema.plugin(passportLocalMongoose);
+
+const User = new mongoose.model("User", userSchema);
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 const port = 3000; 
 
@@ -14,25 +48,186 @@ app.listen (port, () => {
 });
 
 app.get("/", (req, res)=>{
-    res.render("home.ejs", {logged_in: false})
-});
+    res.render("home.ejs", {logged_in: islogged})
+})
 
 app.get("/ingame", (req, res)=>{
-    res.render("ingame.ejs", {logged_in: true, curr_question_num: 3, question_set_size: 25})
+    res.render("ingame.ejs", {logged_in: islogged, curr_question_num: (counter + 1), question_set_size: 10, question_text: result.questions[counter].text})
 });
 
 app.get("/login", (req, res)=>{
-    res.render("login.ejs", {logged_in: false})
+    res.render("login.ejs", {logged_in: islogged})
 });
 
 app.get("/signup", (req, res)=>{
-    res.render("signup.ejs", {logged_in: false})
+    res.render("signup.ejs", {logged_in: islogged})
 });
 
-app.get("/profile", (req, res)=>{
-    res.render("profile.ejs", {logged_in: true, username: "test", grade: 8, date:"November 10, 2021", score:"90% (9/10)", time_taken: "10 minutes 34 seconds", operations_list: "Addition, Subtraction, Multiplication, Division"})
+app.get("/profile", async (req, res)=>{
+    console.log("A user is accessing the reviews route using get, and...");
+    if ( req.isAuthenticated() ){
+        try {
+            console.log( "was authorized and found:" );
+            const pastquizzes = await Quizzes.find({user_id: req.user.username});
+            console.log( pastquizzes[0].questions[0] );
+            res.render("profile.ejs", {logged_in: islogged, username: req.user.username, quizzes: pastquizzes})
+            //quizzes[entry number].date gives date .grade gives grade .score gives score
+        } catch ( error ) {
+            console.log( error );
+        }
+    } else {
+        console.log( "was not authorized." );
+        res.redirect( "/" );
+    }
 });
+    
 
 app.get("/completed_game", (req, res)=>{
-    res.render("completed_game.ejs", {logged_in: true, score:"90% (9/10)"})
+    res.render("completed_game.ejs", {logged_in: islogged, questions: testarray, })
+    //questions[question number].text will giver give the question ex 2 + 2
+    //questions[question number].userAnswer will give their answer
+    //questions[question number].correctAnswer will give the right answer
+    //questions[question number].correct will give true or false if correct or wrong
+    //questions[question number]._id will give the question #
 });
+
+app.post("/", (req, res) => {
+    if(req.body.gradeselection != "" && req.body.gradeselection != null && req.body.operationselection != "" && req.body.operationselection != null )
+    {
+        grade = req.body.gradeselection;
+        mod = req.body.operationselection;
+        var quiz = new Object();
+        quiz.operations = [mod];
+        quiz.grade = grade;
+        result = generateQuestions(quiz);
+        counter = 0;
+        totalcorrect = 0;
+        res.redirect("/ingame");
+    }
+    else
+        res.redirect("/")
+});
+
+app.post("/ingame", (req, res) => {
+    if(req.body.answer != "" && req.body.answer != null)
+    {
+        var test = new Object();
+        answers = req.body.answer;
+        if(answers == result.questions[counter].answer)
+        {
+            correct = true;
+            totalcorrect ++;
+        }
+        else
+            correct = false;
+        
+        test._id = counter;
+        test.arithmeticOperation = result.questions[counter].arithmeticOperation
+        test.text = result.questions[counter].text;
+        test.userAnswer = answers;
+        test.correctAnswer = result.questions[counter].answer;
+        test.correct = correct;
+        testarray.push(test);
+        counter++;
+        console.log(testarray[0].text);
+        if(counter === 10)
+        {
+            
+            console.log(testarray[1].text);
+            console.log(testarray[2].text);
+            console.log(testarray[3].text);
+            var totalscore = ((totalcorrect / 10) * 100)
+            if(islogged === true)
+            {
+                const quizzes = new Quizzes({
+                user: req.user.username,
+                date: Date(),
+                timeTaken: 5,
+                grade: result.grade,
+                selectedTypes: mod,
+                score: totalscore,
+                questions: [testarray[0], testarray[1], testarray[2], testarray[3], testarray[4], testarray[5], testarray[6], testarray[7], testarray[8], testarray[9]]
+                })
+                quizzes.save();
+            }
+            res.redirect("/completed_game");
+        }
+        else
+            res.redirect("/ingame");
+    }
+    else
+        res.redirect("/ingame")
+});
+
+app.post( "/signup", (req, res) => {
+    console.log( "User " + req.body.username + " is attempting to register" );
+    User.register({ username : req.body.username }, 
+                    req.body.password, 
+                    ( err, user ) => {
+        if ( err ) {
+        console.log( err );
+            res.redirect( "/signup" );
+        } else {
+            passport.authenticate( "local" )( req, res, () => {
+                islogged=true;
+                res.redirect( "/" );
+            });
+        }
+    });
+});
+
+app.post( "/login", ( req, res ) => {
+    console.log( "User " + req.body.username + " is attempting to log in" );
+    const user = new User ({
+        username: req.body.username,
+        password: req.body.password
+    });
+    req.login ( user, ( err ) => {
+        if ( err ) {
+            console.log( err );
+            res.redirect( "/login" );
+        } else {
+            passport.authenticate( "local" )( req, res, () => {
+                islogged = true;
+                res.redirect( "/" ); 
+            });
+        }
+    });
+});
+
+app.post( "/logout", ( req, res ) => {
+    console.log( "A user is logging out" );
+    islogged = false;
+    req.logout();
+    res.redirect("/");
+});
+
+import { generateQuestions } from "./generator.mjs";
+
+var grade;
+var mod;
+var counter;
+var result;
+var answers;
+var correct;
+var totalcorrect;
+var testarray = [];
+var islogged = false;
+
+const quizzesSchema = new mongoose.Schema ({
+    user: String,
+    date: Date,
+    timeTaken: Number,
+    grade: Number,
+    selectedTypes: Array,
+    score: Number,
+    questions: 
+    [{  _id: Number,
+        arithmeticOperation: String,
+        text: String,
+        userAnswer: Number,
+        correctAnswer: Number,
+        correct: Boolean}]
+})
+
+const Quizzes = new mongoose.model("quizzes", quizzesSchema);
