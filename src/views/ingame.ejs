@@ -15,9 +15,9 @@
             <div id="question-number">
                 <span>Question: </span><%=curr_question_num%><span><span>/</span></span><span><%=question_set_size%></span>
             </div>
-            
+
             <div id="timer">
-                <span id="timer-header">Time Passed: </span><span class="timer-value">13</span><span class="timer-value">minutes</span><span class="timer-value">24</span><span class="timer-value">seconds</span>
+                <span id="timer-header">Time Passed: </span><span class="timer-value" id="timer-minutes"><%=Math.floor(curr_seconds/60)%></span><span class="timer-value">minutes</span><span class="timer-value" id="timer-seconds"><%=curr_seconds%60%></span><span class="timer-value">seconds</span>
             </div>
 
             <div id="line">
@@ -44,6 +44,19 @@
             
         </form>
     </div>
-
+    <% var temp_seconds = curr_seconds %>
+    <script>
+        //Not actually an error, just confusion with EJS syntax
+        var seconds = <%=temp_seconds%>;
+        console.log(seconds);
+        function timer_start(){
+            timer = setInterval ( function(){
+                seconds += 1;
+                document.getElementById("timer-minutes").innerHTML = Math.floor(seconds/60);
+                document.getElementById("timer-seconds").innerHTML = seconds%60;
+            }, 1000);
+        }
+        timer_start();
+    </script>
 </body>
 </html>

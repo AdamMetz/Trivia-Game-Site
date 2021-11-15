@@ -53,7 +53,7 @@ app.get("/", (req, res)=>{
 })
 
 app.get("/ingame", (req, res)=>{
-    res.render("ingame.ejs", {logged_in: islogged, curr_question_num: (counter + 1), question_set_size: 10, question_text: result.questions[counter].text})
+    res.render("ingame.ejs", {logged_in: islogged, curr_question_num: (counter + 1), question_set_size: 10, question_text: result.questions[counter].text, curr_seconds:seconds})
 });
 
 app.get("/login", (req, res)=>{
@@ -85,7 +85,7 @@ app.get("/profile", async (req, res)=>{
 
 app.get("/completed_game", (req, res)=>{
     var totalscore = String((totalcorrect / 10) * 100) + "% ("+totalcorrect+"/10)";
-    res.render("completed_game.ejs", {logged_in: islogged, questions: testarray, score: totalscore})
+    res.render("completed_game.ejs", {logged_in: islogged, questions: testarray, score: totalscore, question_number:req.query.question_number, total_seconds: seconds})
     //questions[question number].text will giver give the question ex 2 + 2
     //questions[question number].userAnswer will give their answer
     //questions[question number].correctAnswer will give the right answer
@@ -94,7 +94,7 @@ app.get("/completed_game", (req, res)=>{
 });
 
 app.post("/", (req, res) => {
-    console.log(testarray)
+    timer_end();
     if(req.body.grade_selection != "" && req.body.grade_selection != null && req.body.operation_selection != "" && req.body.operation_selection != null )
     {
         testarray = [];
@@ -112,6 +112,7 @@ app.post("/", (req, res) => {
         result = generateQuestions(quiz);
         counter = 0;
         totalcorrect = 0;
+        timer_start();
         res.redirect("/ingame");
     }
     else
@@ -139,13 +140,9 @@ app.post("/ingame", (req, res) => {
         test.correct = correct;
         testarray.push(test);
         counter++;
-        console.log(testarray[0].text);
         if(counter === 10)
         {
-            
-            console.log(testarray[1].text);
-            console.log(testarray[2].text);
-            console.log(testarray[3].text);
+            timer_end();
             var totalscore = ((totalcorrect / 10) * 100)
             console.log(totalcorrect)
             if(islogged === true)
@@ -155,7 +152,7 @@ app.post("/ingame", (req, res) => {
                 const quizzes = new Quizzes({
                 user: req.user.username,
                 date: Date(),
-                timeTaken: 5,
+                timeTaken: seconds,
                 grade: result.grade,
                 selectedTypes: mod,
                 score: totalscore,
@@ -244,3 +241,17 @@ const quizzesSchema = new mongoose.Schema ({
 });
 
 const Quizzes = new mongoose.model("quizzes", quizzesSchema);
+
+var seconds = 0;
+var timer;
+function timer_start(){
+    seconds = 0;
+    timer = setInterval ( function(){
+        seconds += 1;
+
+    }, 1000);
+}
+
+function timer_end(){
+    clearInterval(timer);
+}

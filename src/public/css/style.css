@@ -603,6 +603,14 @@ input[type=number] {
     cursor: pointer;
 }
 
+.correct {
+    fill: rgba(0,206,14,0.35);
+}
+
+.incorrect {
+    fill: rgba(206,0,0,0.35);
+}
+
 #review-question{
     grid-column: 2/12;
     justify-self: center;
