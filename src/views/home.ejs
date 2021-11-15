@@ -11,12 +11,12 @@
     <%- include("partials/navbar") -%>
 
     <div class = "page-container">
-            <form class="main-container" action="/ingame" method="GET">
+            <form class="main-container" action="/" method="POST">
 
                 <!--Grade Selections-->
                 <span id="choose-grade-text">Choose Your Grade Level</span>
                 <label id="grade-button-1">
-                    <input type="radio" name="grade-selection" style="display: none;" value="1">
+                    <input type="radio" name="grade_selection" style="display: none;" value="1">
                     <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
                         <g>
                         <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
@@ -28,7 +28,7 @@
                     </svg>
                 </label>
                 <label id="grade-button-2">
-                    <input type="radio" name="grade-selection" style="display: none;" value="2">
+                    <input type="radio" name="grade_selection" style="display: none;" value="2">
                     <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
                         <g>
                         <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
@@ -40,7 +40,7 @@
                     </svg>
                 </label>
                 <label id="grade-button-3">
-                    <input type="radio" name="grade-selection" style="display: none;" value="3">
+                    <input type="radio" name="grade_selection" style="display: none;" value="3">
                     <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
                         <g>
                         <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
@@ -52,7 +52,7 @@
                     </svg>
                 </label>
                 <label id="grade-button-4">
-                    <input type="radio" name="grade-selection" style="display: none;" value="4">
+                    <input type="radio" name="grade_selection" style="display: none;" value="4">
                     <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
                         <g>
                         <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
@@ -64,7 +64,7 @@
                     </svg>
                 </label>
                 <label id="grade-button-5">
-                    <input type="radio" name="grade-selection" style="display: none;" value="5">
+                    <input type="radio" name="grade_selection" style="display: none;" value="5">
                     <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
                         <g>
                         <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
@@ -76,7 +76,7 @@
                     </svg>
                 </label>
                 <label id="grade-button-6">
-                    <input type="radio" name="grade-selection" style="display: none;" value="6">
+                    <input type="radio" name="grade_selection" style="display: none;" value="6">
                     <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
                         <g>
                         <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
@@ -88,7 +88,7 @@
                     </svg>
                 </label>
                 <label id="grade-button-7">
-                    <input type="radio" name="grade-selection" style="display: none;" value="7">
+                    <input type="radio" name="grade_selection" style="display: none;" value="7">
                     <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
                         <g>
                         <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
@@ -100,7 +100,7 @@
                     </svg>
                 </label>
                 <label id="grade-button-8">
-                    <input type="radio" name="grade-selection" style="display: none;" value="8">
+                    <input type="radio" name="grade_selection" style="display: none;" value="8">
                     <svg class="grade-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="214" height="60" viewBox="0 0 214 60">
                         <g>
                         <g class="grade-button-fill"  stroke="#675656" stroke-width="3">
@@ -115,7 +115,7 @@
                 <!--Question Type Selections-->
                 <span id="question-type-text">Select Question Types</span>
                 <label id="addition-button">
-                    <input type="checkbox" name="operation-selection" style="display: none;" value="addition">
+                    <input type="checkbox" name="operation_selection" style="display: none;" value="addition">
                     <svg class="operation-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="249" height="84" viewBox="0 0 249 84">
                         <g stroke="#675656" stroke-width="4">
                           <rect width="249" height="84" stroke="none"/>
@@ -127,7 +127,7 @@
                     </svg>
                 </label>
                 <label id="subtraction-button">
-                    <input type="checkbox" name="operation-selection" style="display: none;" value="subtraction">
+                    <input type="checkbox" name="operation_selection" style="display: none;" value="subtraction">
                     <svg class="operation-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="304" height="84" viewBox="0 0 304 84">
                         <g stroke="#675656" stroke-width="4">
                           <rect width="304" height="84" stroke="none"/>
@@ -139,7 +139,7 @@
                     </svg>                      
                 </label>
                 <label id="multiplication-button">
-                    <input type="checkbox" name="operation-selection" style="display: none;" value="multiplication">
+                    <input type="checkbox" name="operation_selection" style="display: none;" value="multiplication">
                     <svg class="operation-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="321" height="84" viewBox="0 0 321 84">
                         <g stroke="#675656" stroke-width="4">
                           <rect width="321" height="84" stroke="none"/>
@@ -151,7 +151,7 @@
                       </svg>                  
                 </label>
                 <label id="division-button">
-                    <input type="checkbox" name="operation-selection" style="display: none;" value="division">
+                    <input type="checkbox" name="operation_selection" style="display: none;" value="division">
                     <svg class="operation-button" fill="none" xmlns="http://www.w3.org/2000/svg" width="231" height="84" viewBox="0 0 231 84">
                         <g stroke="#675656" stroke-width="4">
                           <rect width="231" height="84" stroke="none"/>

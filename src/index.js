@@ -2,8 +2,9 @@ import express from 'express';
 const app = express(); 
 
 app.use(express.urlencoded({ extended: false})); 
-app.use(express.static("public"));
+app.use(express.static("src/public"));
 app.set("view engine", "ejs");
+app.set('views', 'src/views');
 
 import mongoose from 'mongoose';
 mongoose.connect( "mongodb://localhost:27017/MathBlitz", 
@@ -22,7 +23,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use (passport.initialize());
+app.use(passport.initialize());
 app.use (passport.session());
 
 const userSchema = new mongoose.Schema ({
@@ -83,7 +84,8 @@ app.get("/profile", async (req, res)=>{
     
 
 app.get("/completed_game", (req, res)=>{
-    res.render("completed_game.ejs", {logged_in: islogged, questions: testarray, })
+    var totalscore = String((totalcorrect / 10) * 100) + "% ("+totalcorrect+"/10)";
+    res.render("completed_game.ejs", {logged_in: islogged, questions: testarray, score: totalscore})
     //questions[question number].text will giver give the question ex 2 + 2
     //questions[question number].userAnswer will give their answer
     //questions[question number].correctAnswer will give the right answer
@@ -92,12 +94,20 @@ app.get("/completed_game", (req, res)=>{
 });
 
 app.post("/", (req, res) => {
-    if(req.body.gradeselection != "" && req.body.gradeselection != null && req.body.operationselection != "" && req.body.operationselection != null )
+    console.log(testarray)
+    if(req.body.grade_selection != "" && req.body.grade_selection != null && req.body.operation_selection != "" && req.body.operation_selection != null )
     {
-        grade = req.body.gradeselection;
-        mod = req.body.operationselection;
+        testarray = [];
+        console.log(req.body.operation_selection)
+        grade = req.body.grade_selection;
+        mod = req.body.operation_selection;
         var quiz = new Object();
-        quiz.operations = [mod];
+        if(typeof(mod) === "string"){
+            quiz.operations = [mod];
+        } else {
+            quiz.operations = mod;
+        }
+        console.log(quiz.operations);
         quiz.grade = grade;
         result = generateQuestions(quiz);
         counter = 0;
@@ -137,8 +147,11 @@ app.post("/ingame", (req, res) => {
             console.log(testarray[2].text);
             console.log(testarray[3].text);
             var totalscore = ((totalcorrect / 10) * 100)
+            console.log(totalcorrect)
             if(islogged === true)
             {
+                console.log("test")
+                console.log(testarray)
                 const quizzes = new Quizzes({
                 user: req.user.username,
                 date: Date(),
@@ -202,7 +215,7 @@ app.post( "/logout", ( req, res ) => {
     res.redirect("/");
 });
 
-import { generateQuestions } from "./generator.mjs";
+import { generateQuestions } from "./modules/generator.mjs";
 
 var grade;
 var mod;
@@ -228,6 +241,6 @@ const quizzesSchema = new mongoose.Schema ({
         userAnswer: Number,
         correctAnswer: Number,
         correct: Boolean}]
-})
+});
 
 const Quizzes = new mongoose.model("quizzes", quizzesSchema);

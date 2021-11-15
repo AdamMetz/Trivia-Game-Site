@@ -11,7 +11,7 @@
     <%- include("partials/navbar") -%>
 
     <div class="page-container">
-        <form class="in-game-container" action="">
+        <form class="in-game-container" action="/ingame" method="POST">
             <div id="question-number">
                 <span>Question: </span><%=curr_question_num%><span><span>/</span></span><span><%=question_set_size%></span>
             </div>
@@ -27,7 +27,7 @@
             </div>
 
             <div id="in-game-question">
-                <label for="answer">9 + 10 =</label><input class="form-input" type="number" name="answer">
+                <label for="answer"><%=question_text%></label><input class="form-input" type="number" name="answer">
             </div>
 
             <label id="next-question-button">

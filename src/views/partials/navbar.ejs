@@ -20,7 +20,7 @@
     <% if (logged_in) { %>
         
 
-        <form id="logout-button" action="/" method="GET" >
+        <form id="logout-button" action="/logout" method="POST" >
             <!-- Bit of a weird way to turn an SVG into a submit button. Nesting a submit button and SVG into a label, then hiding the submit button. -->
             <label>
                 <input type="submit" style="display: none;">
