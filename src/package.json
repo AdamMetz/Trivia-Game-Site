@@ -1,7 +1,7 @@
 {
   "name": "package.json",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node index.js"
   },
   "type": "module",
   "version": "0.0.0",
