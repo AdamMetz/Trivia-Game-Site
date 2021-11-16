@@ -430,10 +430,13 @@ input[type=number] {
 /* PROFILE PAGE */
 
 .profile-container{
-    display: grid;
-    grid-template-columns: repeat(20, 1fr);
-    grid-template-rows:repeat(20, 1fr);
-    gap: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    gap: 20px;
+
+    min-width: 81vw;
+    min-height: 78vh;
 
     grid-column: 2/12;
     grid-row: 3/9;
@@ -442,11 +445,11 @@ input[type=number] {
     border-radius: 1vw;
     border-width: 1vw;
     border-style: solid;
-
-    height: 78vh;
+    max-width: max-content;
 }
 
 #profile-user-text{
+    align-self:  left;
     grid-row: 1;
     grid-column: 1/15;
     max-height: 5vh;
@@ -609,6 +612,10 @@ input[type=number] {
 
 .incorrect {
     fill: rgba(206,0,0,0.35);
+}
+
+.review-correct{
+    fill:#a6eeaa;
 }
 
 #review-question{

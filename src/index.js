@@ -69,8 +69,8 @@ app.get("/profile", async (req, res)=>{
     if ( req.isAuthenticated() ){
         try {
             console.log( "was authorized and found:" );
-            const pastquizzes = await Quizzes.find({user_id: req.user.username});
-            console.log( pastquizzes[0].questions[0] );
+            const pastquizzes = await Quizzes.find({user: req.user.username});
+            //console.log( pastquizzes[0].questions[0] );
             res.render("profile.ejs", {logged_in: islogged, username: req.user.username, quizzes: pastquizzes})
             //quizzes[entry number].date gives date .grade gives grade .score gives score
         } catch ( error ) {
