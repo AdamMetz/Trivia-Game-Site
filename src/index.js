@@ -2,9 +2,9 @@ import express from 'express';
 const app = express(); 
 
 app.use(express.urlencoded({ extended: false})); 
-app.use(express.static("src/public"));
+app.use(express.static("public"));
 app.set("view engine", "ejs");
-app.set('views', 'src/views');
+app.set('views', 'views');
 
 import mongoose from 'mongoose';
 mongoose.connect( "mongodb://localhost:27017/MathBlitz", 
