@@ -19,7 +19,7 @@ const questionGenerators = {
 //     arithmeticOperation: string representing an arithmetic operation
 //     text: string representing the question
 //     answer: integer representing the correct answer
-function generateQuestions(options) {
+function generateQuestions(options, generator) {
     const operations = options.operations;
     const grade = options.grade;
     const numberOfQuestions = 10
@@ -28,9 +28,9 @@ function generateQuestions(options) {
     for (let i = 0; i < numberOfQuestions; i++) {
         questions[i] = new Object();
         const question = questions[i];
-        const arithmeticOperation = operations[randomInteger(0, operations.length)];
+        const arithmeticOperation = operations[randomInteger(0, operations.length, generator)];
         question.arithmeticOperation = arithmeticOperation;
-        ({ text: question.text, answer: question.answer } = questionGenerators[arithmeticOperation](grade));
+        ({ text: question.text, answer: question.answer } = questionGenerators[arithmeticOperation](grade, generator));
     }
 
     return {grade: grade, questions: questions};
@@ -54,11 +54,17 @@ class Xorshift {
 }
 
 function randomInteger(min, max, generator) {
-    const range = max - min;
-    return (generator.generate() % range) + min;
+    const range = (max - min) - 1;
+    let mask = ~0;
+    mask >>>= Math.clz32(range | 1);
+    let x = 0 | 0;
+    do {
+        x = generator.generate() & mask;
+    } while (x > range);
+    return x;
 }
 
-function generateAddition(grade) {
+function generateAddition(grade, generator) {
     const maxRange = () => {
         if (grade <= 2) {
             return 11;
@@ -69,8 +75,8 @@ function generateAddition(grade) {
         }
     };
 
-    const answer = randomInteger(0, maxRange());
-    const firstOperand = answer - randomInteger(0, answer + 1);
+    const answer = randomInteger(0, maxRange(), generator);
+    const firstOperand = answer - randomInteger(0, answer + 1, generator);
     const secondOperand = answer - firstOperand;
 
     return {
