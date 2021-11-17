@@ -36,8 +36,26 @@ function generateQuestions(options) {
     return {grade: grade, questions: questions};
 }
 
-function randomInteger(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
+class Xorshift {
+    #state = 1;
+
+    constructor (seedValue) {
+        this.#state = seedValue;
+    }
+
+    generate() {
+        let x = this.#state;
+        x ^= x << 13;
+        x ^= x >>> 17;
+        x ^= x << 5;
+        this.#state = x;
+        return x;
+    }
+}
+
+function randomInteger(min, max, generator) {
+    const range = max - min;
+    return (generator.generate() % range) + min;
 }
 
 function generateAddition(grade) {
@@ -130,4 +148,4 @@ function generateDivision(grade) {
     };
 }
 
-export { generateQuestions };
+export { Xorshift, generateQuestions };

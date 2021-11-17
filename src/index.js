@@ -212,7 +212,7 @@ app.post( "/logout", ( req, res ) => {
     res.redirect("/");
 });
 
-import { generateQuestions } from "./modules/generator.mjs";
+import { Xorshift, generateQuestions } from "./modules/generator.mjs";
 
 var grade;
 var mod;
