@@ -110,7 +110,7 @@ app.post("/", (req, res) => {
         console.log(quiz.operations);
         quiz.grade = grade;
         const seed = Date.now() | 1;
-        console.log(seed);
+        console.log("Seed: " + seed);
         const generator = new Xorshift(seed);
         result = generateQuestions(quiz, generator);
         counter = 0;
