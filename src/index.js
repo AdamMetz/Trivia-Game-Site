@@ -109,7 +109,9 @@ app.post("/", (req, res) => {
         }
         console.log(quiz.operations);
         quiz.grade = grade;
-        const generator = new Xorshift(Date.now() | 0);
+        const seed = Date.now() | 1;
+        console.log(seed);
+        const generator = new Xorshift(seed);
         result = generateQuestions(quiz, generator);
         counter = 0;
         totalcorrect = 0;
