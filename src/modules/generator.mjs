@@ -36,6 +36,7 @@ function generateQuestions(options, generator) {
     return {grade: grade, questions: questions};
 }
 
+// Implements the standard xorshift algorithm with 32 bits of state
 class Xorshift {
     #state = 1;
 
@@ -43,6 +44,7 @@ class Xorshift {
         this.#state = seedValue;
     }
 
+    // Algorithm based on example from Wikipedia, itself by G. Marsaglia
     generate() {
         let x = this.#state;
         x ^= x << 13;
@@ -53,6 +55,8 @@ class Xorshift {
     }
 }
 
+// Bitmask with rejection algorithm from Apple's libc
+// Found on https://www.pcg-random.org/posts/bounded-rands.html
 function randomInteger(min, max, generator) {
     const range = (max - min) - 1;
     let mask = ~0;
