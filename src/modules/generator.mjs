@@ -19,7 +19,7 @@ const questionGenerators = {
 //     arithmeticOperation: string representing an arithmetic operation
 //     text: string representing the question
 //     answer: integer representing the correct answer
-function generateQuestions(options, generator) {
+function generateQuestions(options) {
     const operations = options.operations;
     const grade = options.grade;
     const numberOfQuestions = 10
@@ -28,48 +28,19 @@ function generateQuestions(options, generator) {
     for (let i = 0; i < numberOfQuestions; i++) {
         questions[i] = new Object();
         const question = questions[i];
-        const arithmeticOperation = operations[randomInteger(0, operations.length, generator)];
+        const arithmeticOperation = operations[randomInteger(0, operations.length)];
         question.arithmeticOperation = arithmeticOperation;
-        ({ text: question.text, answer: question.answer } = questionGenerators[arithmeticOperation](grade, generator));
+        ({ text: question.text, answer: question.answer } = questionGenerators[arithmeticOperation](grade));
     }
 
     return {grade: grade, questions: questions};
 }
 
-// Implements the standard xorshift algorithm with 32 bits of state
-class Xorshift {
-    #state = 1;
-
-    constructor (seedValue) {
-        this.#state = seedValue;
-    }
-
-    // Algorithm based on example from Wikipedia, itself by G. Marsaglia
-    generate() {
-        let x = this.#state;
-        x ^= x << 13;
-        x ^= x >>> 17;
-        x ^= x << 5;
-        this.#state = x;
-        return x;
-    }
+function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
-// Bitmask with rejection algorithm from Apple's libc
-// Found on https://www.pcg-random.org/posts/bounded-rands.html
-function randomInteger(min, max, generator) {
-    const range = (max - min) - 1;
-    let mask = ~0;
-    mask >>>= Math.clz32(range | 1);
-    let x = 0 | 0;
-    do {
-        x = generator.generate() & mask;
-    } while (x > range);
-    const y = x + min;
-    return y;
-}
-
-function generateAddition(grade, generator) {
+function generateAddition(grade) {
     const maxRange = () => {
         if (grade <= 2) {
             return 11;
@@ -80,13 +51,9 @@ function generateAddition(grade, generator) {
         }
     };
 
-    const max = maxRange();
-    const answer = randomInteger(0, max, generator);
-    let secondOperand = 0;
-    do {
-        secondOperand = randomInteger(0, max, generator);
-    } while (secondOperand > answer);
-    const firstOperand = answer - secondOperand;
+    const answer = randomInteger(0, maxRange());
+    const firstOperand = answer - randomInteger(0, answer + 1);
+    const secondOperand = answer - firstOperand;
 
     return {
         text: `${firstOperand} + ${secondOperand} = `,
@@ -94,7 +61,7 @@ function generateAddition(grade, generator) {
     };
 }
 
-function generateSubtraction(grade, generator) {
+function generateSubtraction(grade) {
     const maxRange = () => {
         if (grade <= 2) {
             return 11;
@@ -105,12 +72,8 @@ function generateSubtraction(grade, generator) {
         }
     };
 
-    const max = maxRange();
-    const firstOperand = randomInteger(0, max, generator);
-    let secondOperand = 0;
-    do {
-        secondOperand = randomInteger(0, max, generator);
-    } while (secondOperand > firstOperand);
+    const firstOperand = randomInteger(0, maxRange());
+    const secondOperand = randomInteger(0, firstOperand + 1);
     const answer = firstOperand - secondOperand;
 
     return {
@@ -119,7 +82,7 @@ function generateSubtraction(grade, generator) {
     };
 }
 
-function generateMultiplication(grade, generator) {
+function generateMultiplication(grade) {
     const maxRange = () => {
         if (grade <= 4) {
             return 11;
@@ -131,8 +94,8 @@ function generateMultiplication(grade, generator) {
     };
 
     const maxFactor = maxRange();
-    const firstOperand = randomInteger(0, maxFactor, generator);
-    const secondOperand = randomInteger(0, maxFactor, generator);
+    const firstOperand = randomInteger(0, maxFactor);
+    const secondOperand = randomInteger(0, maxFactor);
     const answer = firstOperand * secondOperand;
 
     return {
@@ -141,19 +104,25 @@ function generateMultiplication(grade, generator) {
     };
 }
 
-function generateDivision(grade, generator) {
+function generateDivision(grade) {
     const maxRange = () => {
-        if (grade <= 5) {
+        if (grade <= 4) {
             return 11;
         } else {
-            return 16;
+            return 101;
         }
     };
 
-    const max = maxRange();
-    const secondOperand = randomInteger(1, max, generator);
-    const answer = randomInteger(0, max, generator);
-    const firstOperand = secondOperand * answer;
+    const firstOperand = randomInteger(0, maxRange());
+    const getSecondOperand = () => {
+        let x = 0;
+        do {
+            x = randomInteger(1, 101);
+        } while (firstOperand % x !== 0);
+        return x;
+    }
+    const secondOperand = getSecondOperand();
+    const answer = firstOperand / secondOperand;
 
     return {
         text: `${firstOperand} / ${secondOperand} = `,
@@ -161,4 +130,4 @@ function generateDivision(grade, generator) {
     };
 }
 
-export { Xorshift, generateQuestions };
+export { generateQuestions };

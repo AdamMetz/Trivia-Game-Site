@@ -109,10 +109,7 @@ app.post("/", (req, res) => {
         }
         console.log(quiz.operations);
         quiz.grade = grade;
-        const seed = Date.now() | 1;
-        console.log("Seed: " + seed);
-        const generator = new Xorshift(seed);
-        result = generateQuestions(quiz, generator);
+        result = generateQuestions(quiz);
         counter = 0;
         totalcorrect = 0;
         timer_start();
@@ -215,7 +212,7 @@ app.post( "/logout", ( req, res ) => {
     res.redirect("/");
 });
 
-import { Xorshift, generateQuestions } from "./modules/generator.mjs";
+import { generateQuestions } from "./modules/generator.mjs";
 
 var grade;
 var mod;
