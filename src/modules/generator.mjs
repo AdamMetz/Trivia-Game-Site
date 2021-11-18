@@ -61,7 +61,8 @@ function randomInteger(min, max, generator) {
     do {
         x = generator.generate() & mask;
     } while (x > range);
-    return x;
+    const y = x + min;
+    return y;
 }
 
 function generateAddition(grade, generator) {
@@ -75,9 +76,13 @@ function generateAddition(grade, generator) {
         }
     };
 
-    const answer = randomInteger(0, maxRange(), generator);
-    const firstOperand = answer - randomInteger(0, answer + 1, generator);
-    const secondOperand = answer - firstOperand;
+    const max = maxRange();
+    const answer = randomInteger(0, max, generator);
+    let secondOperand = 0;
+    do {
+        secondOperand = randomInteger(0, max, generator);
+    } while (secondOperand >= answer);
+    const firstOperand = answer - secondOperand;
 
     return {
         text: `${firstOperand} + ${secondOperand} = `,
@@ -85,7 +90,7 @@ function generateAddition(grade, generator) {
     };
 }
 
-function generateSubtraction(grade) {
+function generateSubtraction(grade, generator) {
     const maxRange = () => {
         if (grade <= 2) {
             return 11;
@@ -96,8 +101,12 @@ function generateSubtraction(grade) {
         }
     };
 
-    const firstOperand = randomInteger(0, maxRange());
-    const secondOperand = randomInteger(0, firstOperand + 1);
+    const max = maxRange();
+    const firstOperand = randomInteger(0, max, generator);
+    let secondOperand = 0;
+    do {
+        secondOperand = randomInteger(0, max, generator);
+    } while (secondOperand > firstOperand);
     const answer = firstOperand - secondOperand;
 
     return {
@@ -106,7 +115,7 @@ function generateSubtraction(grade) {
     };
 }
 
-function generateMultiplication(grade) {
+function generateMultiplication(grade, generator) {
     const maxRange = () => {
         if (grade <= 4) {
             return 11;
@@ -118,8 +127,8 @@ function generateMultiplication(grade) {
     };
 
     const maxFactor = maxRange();
-    const firstOperand = randomInteger(0, maxFactor);
-    const secondOperand = randomInteger(0, maxFactor);
+    const firstOperand = randomInteger(0, maxFactor, generator);
+    const secondOperand = randomInteger(0, maxFactor, generator);
     const answer = firstOperand * secondOperand;
 
     return {
@@ -128,25 +137,19 @@ function generateMultiplication(grade) {
     };
 }
 
-function generateDivision(grade) {
+function generateDivision(grade, generator) {
     const maxRange = () => {
-        if (grade <= 4) {
+        if (grade <= 5) {
             return 11;
         } else {
-            return 101;
+            return 16;
         }
     };
 
-    const firstOperand = randomInteger(0, maxRange());
-    const getSecondOperand = () => {
-        let x = 0;
-        do {
-            x = randomInteger(1, 101);
-        } while (firstOperand % x !== 0);
-        return x;
-    }
-    const secondOperand = getSecondOperand();
-    const answer = firstOperand / secondOperand;
+    const max = maxRange();
+    const secondOperand = randomInteger(1, max, generator);
+    const answer = randomInteger(0, max, generator);
+    const firstOperand = secondOperand * answer;
 
     return {
         text: `${firstOperand} / ${secondOperand} = `,
