@@ -85,7 +85,7 @@ function generateAddition(grade, generator) {
     let secondOperand = 0;
     do {
         secondOperand = randomInteger(0, max, generator);
-    } while (secondOperand >= answer);
+    } while (secondOperand > answer);
     const firstOperand = answer - secondOperand;
 
     return {
