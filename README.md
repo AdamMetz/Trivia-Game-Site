@@ -43,7 +43,7 @@ the issue tracker.
 
 This project made use of external licensed code. The external code in question is
 in /src/modules/generator.mjs. The file contains an algorithm which originally
-appeared in Apple's libc, which was later iterated upon by Melissa E. O'Neill.
+appeared in Apple's libc, which was later iterated upon by Melissa E. O'Neill.[^1][^2]
 As of the time of writing, the file includes a copy of the MIT license with
 copywrite attributed to O'Neill. This was done because the code this project
 uses is heavily based on their work. The reasoning behind not needing to follow
@@ -51,3 +51,6 @@ the terms of the Apple Public Source License is that the iterated work is based
 on the concept of how the algorithm in question works rather than modifying the
 code. It is possible that reasoning is faulty. Even after consultation, the
 chosen course of action was done through judgement.
+
+[^1]: [Apple libc relevant source](https://opensource.apple.com/source/Libc/Libc-1439.141.1/gen/FreeBSD/arc4random.c.auto.html)
+[^2]: [O'Neill's relevant source](https://github.com/imneme/bounded-rands/blob/master/bounded32.cpp)
