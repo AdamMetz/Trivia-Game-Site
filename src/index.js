@@ -61,7 +61,7 @@ app.get("/login", (req, res)=>{
 });
 
 app.get("/signup", (req, res)=>{
-    res.render("signup.ejs", {logged_in: islogged})
+    res.render("signup.ejs", {logged_in: islogged, wrong_signup: false})
 });
 
 app.get("/profile", async (req, res)=>{
@@ -174,6 +174,9 @@ app.post("/ingame", (req, res) => {
 
 app.post( "/signup", (req, res) => {
     console.log( "User " + req.body.username + " is attempting to register" );
+    var regex = /^[a-zA-Z0-9_-]+$/;
+    if(req.body.username.length < 3 || req.body.username.length > 20 || req.body.password.length < 8 || req.body.password.length > 20 || req.body.password != req.body.confirm_password || regex.test(req.body.username) == false || regex.test(req.body.password) == false)
+        res.render("signup.ejs", {logged_in: islogged, wrong_signup: true})
     User.register({ username : req.body.username }, 
                     req.body.password, 
                     ( err, user ) => {
