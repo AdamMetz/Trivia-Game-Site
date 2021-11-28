@@ -4,7 +4,7 @@ MEMBERS AND ROLES (30 seconds) (Everyone, in order -> Adam -> Quinn -> Taishi) (
 
 IDEA (30 seconds) (Adam)
 
-WHY WHAT WHO (45 seconds) (Quinn)
+WHY (30 seconds) (Quinn)
 
 DISCUSS PROJECT PLAN
 
@@ -16,11 +16,10 @@ DISCUSS PROJECT PLAN
 
 FEEDBACK (30 seconds) (Adam)
 
-DEMO (3 minutes) (Adam) (Demo + Explaining why our completed code is an MVP)
+DEMO (2 minutes 30 seconds) (Adam) (Demo + Explaining why our completed code is an MVP)
 
-REFLECTION (2 minutes 30 seconds)
+REFLECTION (2 minutes)
 
 	How did you feel about this project? Do you think your team was successful, or? What did you like about the project? What did you dislike about the project? (Quinn, 30 seconds) (No need to address all 4 points but feel free to, but 30 seconds is probably enough to just talk about the first three points)
 	What did your team feel most proud of throughout the entire project experience? (Taishi, 30 seconds) (Getting the first two MVPs done fairly early, satisified about how the producted ended up, etc.)
-	What did we learn as a team (Adam, 30 seconds)
 	How will you use (or not use) what you have learned/experienced in this project going forward? (Taishi -> Quinn ->Adam, 20 seconds EACH) (1 minute total)
