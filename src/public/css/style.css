@@ -9,15 +9,15 @@ html, body {
 
 .navbar-container{
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.161));
     background-color: #FFFFFF;
-    height: 10.2vh;
+    height: 99px;
 }
 
 .navbar-container > #title {
-    grid-column: 1/4;
+    grid-column: 1;
     grid-row: 1;
     font-family: Poppins;
     font-style: normal;
@@ -39,7 +39,8 @@ html, body {
 }
 
 .navbar-container > #home-button{
-    grid-column: 4;
+    position: relative;
+    grid-column: 2;
     grid-row: 1;
 }
 
@@ -52,7 +53,7 @@ html, body {
 }
 
 .navbar-container > #profile-button{
-    grid-column: 6;
+    grid-column: 3;
     grid-row: 1;
 }
 
@@ -65,7 +66,8 @@ html, body {
 }
 
 .navbar-container > #login-button{
-    grid-column: 11;
+    padding-left: 20vw;
+    grid-column: 4;
     padding-top: 2vh;
 }
 
@@ -78,7 +80,7 @@ html, body {
 }
 
 .navbar-container > #signup-button{
-    grid-column: 12;
+    grid-column: 5;
     padding-right: 2vw;
     padding-top: 2vh;
 }
@@ -156,6 +158,23 @@ html, body {
     border-radius:10px;
 }
 
+.invalid-form-input:placeholder-shown {
+    width: 100%;
+    font-size: 2.75vh;
+    padding:10px;
+    border: solid;
+    border-radius:10px;
+    border-width: 7px;
+    border-color: #EEA6A6;
+}
+
+.invalid-form-input{
+    width: 100%;
+    font-size: 2.75vh;
+    padding:10px;
+    border-radius:10px;
+}
+
 #login-submit-button {
     padding-left: 12vw;
     padding-right: 12vw;
@@ -177,6 +196,16 @@ html, body {
     gap: 20px;
 
     grid-column: 4/10;
+    grid-row: 3/9;
+    background-color: #FFFFFF;
+    border: #98838F;
+    border-radius: 1vw;
+    border-width: 1vw;
+    border-style: solid;
+}
+
+.signup-validation-container{
+    grid-column: 10/12;
     grid-row: 3/9;
     background-color: #FFFFFF;
     border: #98838F;
@@ -216,6 +245,51 @@ html, body {
 }
 .signup-submit-button-svg:hover > .signup-submit-button-svg-text {
     fill: #FFFFFF;
+}
+
+.signup-validation-container > * {
+    margin: 5px 5px 5px 5px;
+    font-family: Poppins;
+    font-size: 2.35vh;
+}
+
+.signup-validation-container > span{
+    display: inline-block;
+}
+
+#signup-validation-username-header {
+    color: #78C3FB;
+    font-weight: bold;
+}
+
+.signup-validation-text {
+    color:#98838F;
+}
+
+#signup-validation-password-header {
+    color: #78C3FB;
+    font-weight: bold;
+}
+
+#signup-validation-password-confirm-mismatch {
+    visibility: hidden;
+    color:#EEA6A6;
+}
+
+
+
+    /*Error versions of signup validation text*/
+
+.signup-validation-error {
+    visibility: visible;
+    color:#EEA6A6;
+    font-weight: bold;
+}
+
+#signup-validation-password-confirm-mismatch-error {
+    visibility: visible;
+    color:#EEA6A6;
+    font-weight: bold;
 }
 
 /* HOME PAGE */

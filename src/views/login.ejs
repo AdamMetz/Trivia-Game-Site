@@ -22,6 +22,10 @@
                     <input class="form-input" type="password" name="password"><br>
                     <br>
 
+                    <% if(typeof(invalid_input) != "undefined") { %>
+                        <span class="signup-validation-error" style="display: block; text-align: center;">Invalid Entry!</span>
+                    <% } %>
+
                     <!-- Exported SVG from Adobe XD artboard -->
                     <div id="login-submit-button">
                         <!-- Bit of a weird way to turn an SVG into a submit button. Nesting a submit button and SVG into a label, then hiding the submit button. -->

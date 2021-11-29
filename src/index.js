@@ -69,7 +69,8 @@ app.get("/profile", async (req, res)=>{
     if ( req.isAuthenticated() ){
         try {
             console.log( "was authorized and found:" );
-            const pastquizzes = await Quizzes.find({user: req.user.username});
+            //Query all the users past quizzes, ordering from most recent date to oldest
+            const pastquizzes = await Quizzes.find({user: req.user.username}).sort({date: -1});
             //console.log( pastquizzes[0].questions[0] );
             res.render("profile.ejs", {logged_in: islogged, username: req.user.username, quizzes: pastquizzes})
             //quizzes[entry number].date gives date .grade gives grade .score gives score
@@ -94,6 +95,7 @@ app.get("/completed_game", (req, res)=>{
 });
 
 app.post("/", (req, res) => {
+    if (req.isAuthenticated()){islogged = true;}
     timer_end();
     if(req.body.grade_selection != "" && req.body.grade_selection != null && req.body.operation_selection != "" && req.body.operation_selection != null )
     {
@@ -147,11 +149,8 @@ app.post("/ingame", (req, res) => {
         {
             timer_end();
             var totalscore = ((totalcorrect / 10) * 100)
-            console.log(totalcorrect)
             if(islogged === true)
             {
-                console.log("test")
-                console.log(testarray)
                 const quizzes = new Quizzes({
                 user: req.user.username,
                 date: Date(),
@@ -174,41 +173,66 @@ app.post("/ingame", (req, res) => {
 
 app.post( "/signup", (req, res) => {
     console.log( "User " + req.body.username + " is attempting to register" );
-    var regex = /^[a-zA-Z0-9_-]+$/;
-    if(req.body.username.length < 3 || req.body.username.length > 20 || req.body.password.length < 8 || req.body.password.length > 20 || req.body.password != req.body.confirm_password || regex.test(req.body.username) == false || regex.test(req.body.password) == false)
-        res.render("signup.ejs", {logged_in: islogged, wrong_signup: true})
-    User.register({ username : req.body.username }, 
-                    req.body.password, 
-                    ( err, user ) => {
-        if ( err ) {
-        console.log( err );
-            res.redirect( "/signup" );
-        } else {
-            passport.authenticate( "local" )( req, res, () => {
-                islogged=true;
-                res.redirect( "/" );
-            });
-        }
-    });
+    var regex = /^[a-zA-Z0-9]+$/;
+    let error_list = [];
+    if (req.body.username.length < 3 || req.body.username.length > 20){
+        error_list.push("Invalid Username Length");
+    }
+    if (req.body.password.length < 8 || req.body.password.length > 20){
+        error_list.push("Invalid Password Length");
+    }
+    if (req.body.password != req.body.confirm_password){
+        console.log(req.body.password);
+        console.log(req.body.confirm_password);
+        error_list.push("Password Mismatch");
+    }
+    if (regex.test(req.body.username) == false) {
+        error_list.push("Username Contains Illegal Characters");
+    }
+    if (regex.test(req.body.password) == false){
+        error_list.push("Password Contains Illegal Characters");
+    }
+    if (error_list.length != 0){
+        res.render("signup.ejs", {logged_in: islogged, error_list: error_list});
+    } else {
+        User.register({ username : req.body.username }, 
+            req.body.password, 
+            ( err, user ) => {
+            if ( err ) {
+            console.log( err );
+                res.render("signup.ejs", {logged_in: islogged, db_error: true, taken_username: req.body.username});
+            } else {
+                passport.authenticate( "local" )( req, res, () => {
+                    islogged=true;
+                    res.redirect( "/" );
+                });
+            }
+            });  
+    }
 });
 
 app.post( "/login", ( req, res ) => {
     console.log( "User " + req.body.username + " is attempting to log in" );
-    const user = new User ({
-        username: req.body.username,
-        password: req.body.password
-    });
-    req.login ( user, ( err ) => {
-        if ( err ) {
-            console.log( err );
-            res.redirect( "/login" );
-        } else {
-            passport.authenticate( "local" )( req, res, () => {
-                islogged = true;
-                res.redirect( "/" ); 
-            });
-        }
-    });
+    if(req.body.password.length != 0 && req.body.username.length != 0) {
+        const user = new User ({
+            username: req.body.username,
+            password: req.body.password
+        });
+        req.login ( user, ( err ) => {
+            if ( err ) {
+                console.log( err );
+                res.redirect( "/login" );
+            } else {
+                passport.authenticate( "local" )( req, res, () => {
+                    islogged = true;
+                    res.redirect( "/" ); 
+                });
+            }
+        });
+    } else {
+        res.render("login.ejs", {invalid_input: true, logged_in: false});
+    }
+    
 });
 
 app.post( "/logout", ( req, res ) => {

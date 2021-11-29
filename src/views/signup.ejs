@@ -10,6 +10,31 @@
 <body>
     <%- include("partials/navbar") -%>
 
+    <% 
+    
+    let username_length_error = false;
+    let password_length_error = false;
+    let username_illegal_characters = false;
+    let password_illegal_characters = false;
+    let confirm_password_mismatch = false;
+    
+    if(typeof(error_list) != "undefined") {
+        while (error_list.length != 0){
+            let error = error_list.pop();
+            if (error === "Invalid Username Length") {
+                username_length_error = true;
+            } else if (error === "Invalid Password Length") {
+                password_length_error = true;
+            } else if (error === "Username Contains Illegal Characters") {
+                username_illegal_characters = true;
+            } else if (error === "Password Contains Illegal Characters") {
+                password_illegal_characters = true;
+            } else if (error === "Password Mismatch") {
+                confirm_password_mismatch = true;
+            }
+        }
+    } %>
+
     <div class="page-container">
         <div class="signup-container">
             <span id="signup-text">Sign Up</span>
@@ -17,12 +42,28 @@
             <div id="signup-form">
                 <form action="/signup" method="POST">
                     <label for="username">Username</label><br>
-                    <input class="form-input" type="text" name="username"><br><br>
+                    <% if (username_length_error || username_illegal_characters) {%>
+                        <input class="invalid-form-input" type="text" name="username" placeholder=" "><br><br>
+                    <% } else { %>
+                        <input class="form-input" type="text" name="username"><br><br>
+                    <% } %>
                     <label for="password">Password</label><br>
-                    <input class="form-input" type="password" name="password"><br><br>
-                    <label for="confirm-password">Confirm Password</label><br>
-                    <input class="form-input" type="password" name="confirm-password"><br>
+                    <% if (password_length_error || confirm_password_mismatch || password_illegal_characters) {%>
+                        <input class="invalid-form-input" type="password" name="password" placeholder=" "><br><br>
+                    <% } else { %>
+                        <input class="form-input" type="password" name="password"><br><br>
+                    <% } %>
+                    <label for="confirm_password">Confirm Password</label><br>
+                    <% if (password_length_error || confirm_password_mismatch || password_illegal_characters) {%>
+                        <input class="invalid-form-input" type="password" name="confirm_password" placeholder=" "><br>
+                    <% } else { %>
+                        <input class="form-input" type="password" name="confirm_password"><br>
+                    <% } %>
                     <br>
+
+                    <% if(typeof(db_error) != "undefined") { %>
+                        <span class="signup-validation-error" style="display: block; text-align: center;">Username <%=taken_username%> is taken!</span>
+                    <% } %>
 
                     <!-- Exported SVG from Adobe XD artboard -->
                     <div id="signup-submit-button">
@@ -41,6 +82,59 @@
                 </form>
             </div>
         </div>
+
+        <div class="signup-validation-container">
+
+            
+            
+
+            <% if (username_length_error || username_illegal_characters) {%>
+                <p class="signup-validation-error">Username must be:</p>
+            <% } else { %>
+                <p id="signup-validation-username-header">Username must be:</p>
+            <% } %>
+
+            <% if (username_length_error) {%>
+                <p class="signup-validation-error">3-20 characters long</p>
+            <% } else { %>
+                <p class="signup-validation-text">3-20 characters long</p>
+            <% } %>
+
+            <% if (username_illegal_characters) {%>
+                <p class="signup-validation-error">Only contain letters and numbers</p>
+            <% } else { %>
+                <p class="signup-validation-text">Only contain letters and numbers</p>
+            <% } %>
+            <br><br>
+            <% if (password_length_error || confirm_password_mismatch || password_illegal_characters) {%>
+                <p class="signup-validation-error">Password must be:</p>
+            <% } else { %>
+                <p id="signup-validation-password-header">Password must be:</p>
+            <% } %>
+            
+            <% if (password_length_error) {%>
+                <p class="signup-validation-error">8-20 characters long</p>
+            <% } else { %>
+                <p class="signup-validation-text">8-20 characters long</p>
+            <% } %>
+
+            <% if (password_illegal_characters) {%>
+                <p class="signup-validation-error">Only contain letter and numbers</p>
+            <% } else { %>
+                <p class="signup-validation-text">Only contain letter and numbers</p>
+            <% } %>
+
+            <br><br>
+
+            <% if (confirm_password_mismatch) {%>
+                <p id="signup-validation-password-confirm-mismatch-error">Confirm Password does not match the entered password!</p>
+            <% } else { %>
+                <p id="signup-validation-password-confirm-mismatch">Confirm Password does not match the entered password!</p>
+            <% } %>
+        </div>
+
+        
+        
     </div>
 
 </body>
