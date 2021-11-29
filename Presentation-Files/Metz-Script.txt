@@ -39,6 +39,13 @@ Although this did affect our planning for our third MVP, we unfortunately never 
 
 
 DEMO
+Now I'll demo the website
+Here on the home page the user can right away jump into a game if they'd like, whether they are logged in or not.
+But I'll go ahead and quickly sign up  a user.
+So as long as the username and password entered by the user abide by these rules on the right here, and they enter a unique username, the user can quickly create a new account.
+
+
+
 
 
 REFLECTION
