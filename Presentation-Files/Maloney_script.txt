@@ -1,0 +1,39 @@
+ENSE374 Script 
+
+ 
+
+Intro:  
+
+Hi, my name is Quinn Maloney. My role in developing math blitz was designing and creating the controller 
+
+Why: 
+
+The target audience for math blitz is elementary school students as well as elementary school teachers. 
+We created it to be a tool that students could use to improve their mental math skills in a game format. 
+This could be used by students at home outside of school or could also be used as a way for teachers to 
+add more variety to their math class by making math more of a game and have it appeal more to their students. 
+
+ 
+
+MVC Architecture: 
+
+This is the diagram we created before we started developing math blitz. We found it was helpful when we were 
+in the planning stage and early development stage for getting a good idea of how our website would function 
+and how the different elements will talk to each other. Since we all worked on separate parts of the website it 
+also helped us establish responsibilities as well as how we have to connect our individual pieces once they were 
+completed. 
+
+ 
+
+Reflection: 
+
+Overall, as a team we felt really good about the final product of this project. We definitely see it as a successful 
+project. We really liked that we were able to accomplish all of the goals we had initially set at the start of the 
+project planning phase and we believe that alone would count this as a success but are satisfied we went a bit further. 
+
+ 
+
+What did I learn and will use: 
+
+Moving forward I will also be using some of the planning documents such as the roles and responsibilities chart and the 
+RACI table as we found it kept us organized. 
