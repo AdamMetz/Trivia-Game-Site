@@ -293,7 +293,7 @@ var seconds = 0;
 var timer;
 function timer_start() {
     seconds = 0;
-    timer = setInterval(function () { seconds += 1; }, 1000);
+    timer = setInterval(() => { seconds += 1; }, 1000);
 }
 
 function timer_end() {
