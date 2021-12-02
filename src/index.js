@@ -132,17 +132,12 @@ app.post("/", (req, res) => {
     timer_end();
     if (req.body.grade_selection != "" && req.body.grade_selection != null && req.body.operation_selection != "" && req.body.operation_selection != null) {
         testarray = [];
-        console.log(req.body.operation_selection);
         const grade = req.body.grade_selection;
         mod = req.body.operation_selection;
-        const quiz = new Object();
-        if (typeof (mod) === "string") {
-            quiz.operations = [mod];
-        } else {
-            quiz.operations = mod;
-        }
-        console.log(quiz.operations);
-        quiz.grade = grade;
+        const quiz = {
+            grade: grade,
+            operations: (mod === "string") ? [mod] : mod
+        };
         const seed = Date.now() | 1;
         console.log(`Seed: ${seed}`);
         const generator = new Xorshift(seed);
@@ -158,20 +153,22 @@ app.post("/", (req, res) => {
 
 app.post("/ingame", (req, res) => {
     if (req.body.answer != "" && req.body.answer != null) {
-        const test = new Object();
         const answer = +req.body.answer;
         const correct = answer === result.questions[counter].answer;
         if (correct) {
             totalcorrect++;
         }
 
-        test._id = counter;
-        test.arithmeticOperation = result.questions[counter].arithmeticOperation;
-        test.text = result.questions[counter].text;
-        test.userAnswer = answer;
-        test.correctAnswer = result.questions[counter].answer;
-        test.correct = correct;
+        const test = {
+            _id: counter,
+            arithmeticOperation: result.questions[counter].arithmeticOperation,
+            text: result.questions[counter].text,
+            userAnswer: answer,
+            correctAnswer: result.questions[counter].answer,
+            correct: correct
+        };
         testarray.push(test);
+
         counter++;
         if (counter === 10) {
             timer_end();

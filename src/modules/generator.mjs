@@ -23,6 +23,8 @@
 // The function randomInteger contains licensed material
 // More details can be found above the function in question
 
+import { text } from "express";
+
 const questionGenerators = {
     addition: generateAddition,
     subtraction: generateSubtraction,
@@ -51,11 +53,9 @@ function generateQuestions(options, generator) {
     const questions = new Array(numberOfQuestions);
 
     for (let i = 0; i < numberOfQuestions; i++) {
-        questions[i] = new Object();
-        const question = questions[i];
         const arithmeticOperation = operations[randomInteger(0, operations.length, generator)];
-        question.arithmeticOperation = arithmeticOperation;
-        ({ text: question.text, answer: question.answer } = questionGenerators[arithmeticOperation](grade, generator));
+        const { text, answer } = questionGenerators[arithmeticOperation](grade, generator);
+        questions[i] = { arithmeticOperation: arithmeticOperation, text: text, answer: answer };
     }
 
     return { grade: grade, questions: questions };
