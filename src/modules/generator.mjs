@@ -58,7 +58,7 @@ function generateQuestions(options, generator) {
         ({ text: question.text, answer: question.answer } = questionGenerators[arithmeticOperation](grade, generator));
     }
 
-    return {grade: grade, questions: questions};
+    return { grade: grade, questions: questions };
 }
 
 // Implements the standard xorshift algorithm with 32 bits of state
