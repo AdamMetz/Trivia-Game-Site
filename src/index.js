@@ -110,7 +110,7 @@ app.get("/profile", async (req, res) => {
 
 
 app.get("/completed_game", (req, res) => {
-    var totalscore = `${totalcorrect * 10}% (${totalcorrect}/10)`;
+    const totalscore = `${totalcorrect * 10}% (${totalcorrect}/10)`;
     res.render("completed_game.ejs", {
         logged_in: islogged,
         questions: testarray,
@@ -135,7 +135,7 @@ app.post("/", (req, res) => {
         console.log(req.body.operation_selection);
         const grade = req.body.grade_selection;
         mod = req.body.operation_selection;
-        var quiz = new Object();
+        const quiz = new Object();
         if (typeof (mod) === "string") {
             quiz.operations = [mod];
         } else {
@@ -158,7 +158,7 @@ app.post("/", (req, res) => {
 
 app.post("/ingame", (req, res) => {
     if (req.body.answer != "" && req.body.answer != null) {
-        var test = new Object();
+        const test = new Object();
         const answer = +req.body.answer;
         const correct = answer === result.questions[counter].answer;
         if (correct) {
@@ -175,7 +175,7 @@ app.post("/ingame", (req, res) => {
         counter++;
         if (counter === 10) {
             timer_end();
-            var totalscore = ((totalcorrect / 10) * 100)
+            const totalscore = (totalcorrect * 10);
             if (islogged === true) {
                 const quizzes = new Quizzes({
                     user: req.user.username,
@@ -199,7 +199,7 @@ app.post("/ingame", (req, res) => {
 
 app.post("/signup", (req, res) => {
     console.log(`User ${req.body.username} is attempting to register`);
-    var regex = /^[a-zA-Z0-9]+$/;
+    const regex = /^[a-zA-Z0-9]+$/;
     let error_list = [];
     if (req.body.username.length < 3 || req.body.username.length > 20) {
         error_list.push("Invalid Username Length");
@@ -274,15 +274,15 @@ app.post("/logout", (req, res) => {
     res.redirect("/");
 });
 
-var mod;
-var counter;
-var result;
-var totalcorrect;
-var testarray = [];
-var islogged = false;
+let mod;
+let counter;
+let result;
+let totalcorrect;
+let testarray = [];
+let islogged = false;
 
-var seconds = 0;
-var timer;
+let seconds = 0;
+let timer;
 function timer_start() {
     seconds = 0;
     timer = setInterval(() => { seconds += 1; }, 1000);
