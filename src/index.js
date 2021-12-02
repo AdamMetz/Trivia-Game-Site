@@ -135,7 +135,7 @@ app.post("/", (req, res) => {
         testarray = [];
         const quiz = {
             grade: grade,
-            operations: (mod === "string") ? [mod] : mod
+            operations: (typeof(mod) === "string") ? [mod] : mod
         };
         const seed = Date.now() | 1;
         console.log(`Seed: ${seed}`);
