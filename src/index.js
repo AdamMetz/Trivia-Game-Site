@@ -64,9 +64,7 @@ passport.deserializeUser(User.deserializeUser());
 
 const port = 3000;
 
-// Simple server operation
 app.listen(port, () => {
-    // template literal
     console.log(`Server is running on http://localhost:${port}`);
 });
 
@@ -97,11 +95,10 @@ app.get("/profile", async (req, res) => {
     if (req.isAuthenticated()) {
         try {
             console.log("was authorized and found:");
-            //Query all the users past quizzes, ordering from most recent date to oldest
+            // Query all the users past quizzes, ordering from most recent date to oldest
             const pastquizzes = await Quizzes.find({ user: req.user.username }).sort({ date: -1 });
-            //console.log( pastquizzes[0].questions[0] );
             res.render("profile.ejs", { logged_in: islogged, username: req.user.username, quizzes: pastquizzes });
-            //quizzes[entry number].date gives date .grade gives grade .score gives score
+            // quizzes[entry number].date gives date .grade gives grade .score gives score
         } catch (error) {
             console.log(error);
         }
@@ -121,11 +118,11 @@ app.get("/completed_game", (req, res) => {
         question_number: req.query.question_number,
         total_seconds: seconds
     });
-    //questions[question number].text will giver give the question ex 2 + 2
-    //questions[question number].userAnswer will give their answer
-    //questions[question number].correctAnswer will give the right answer
-    //questions[question number].correct will give true or false if correct or wrong
-    //questions[question number]._id will give the question #
+    // questions[question number].text will giver give the question ex 2 + 2
+    // questions[question number].userAnswer will give their answer
+    // questions[question number].correctAnswer will give the right answer
+    // questions[question number].correct will give true or false if correct or wrong
+    // questions[question number]._id will give the question #
 });
 
 app.post("/", (req, res) => {
