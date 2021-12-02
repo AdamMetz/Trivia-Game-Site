@@ -151,9 +151,9 @@ app.post("/", (req, res) => {
         totalcorrect = 0;
         timer_start();
         res.redirect("/ingame");
-    }
-    else
+    } else {
         res.redirect("/");
+    }
 });
 
 app.post("/ingame", (req, res) => {
@@ -189,12 +189,12 @@ app.post("/ingame", (req, res) => {
                 quizzes.save();
             }
             res.redirect("/completed_game");
-        }
-        else
+        } else {
             res.redirect("/ingame");
-    }
-    else
+        }
+    } else {
         res.redirect("/ingame");
+    }
 });
 
 app.post("/signup", (req, res) => {
