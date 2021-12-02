@@ -153,18 +153,19 @@ app.post("/", (req, res) => {
 
 app.post("/ingame", (req, res) => {
     if (req.body.answer != "" && req.body.answer != null) {
-        const answer = +req.body.answer;
-        const correct = answer === result.questions[counter].answer;
+        const inputAnswer = +req.body.answer;
+        const currentQuestion = result.questions[counter];
+        const correct = inputAnswer === currentQuestion.answer;
         if (correct) {
             totalcorrect++;
         }
 
         const test = {
             _id: counter,
-            arithmeticOperation: result.questions[counter].arithmeticOperation,
-            text: result.questions[counter].text,
-            userAnswer: answer,
-            correctAnswer: result.questions[counter].answer,
+            arithmeticOperation: currentQuestion.arithmeticOperation,
+            text: currentQuestion.text,
+            userAnswer: inputAnswer,
+            correctAnswer: currentQuestion.answer,
             correct: correct
         };
         testarray.push(test);
@@ -181,7 +182,7 @@ app.post("/ingame", (req, res) => {
                     grade: result.grade,
                     selectedTypes: mod,
                     score: totalscore,
-                    questions: [testarray[0], testarray[1], testarray[2], testarray[3], testarray[4], testarray[5], testarray[6], testarray[7], testarray[8], testarray[9]]
+                    questions: testarray
                 });
                 quizzes.save();
             }
