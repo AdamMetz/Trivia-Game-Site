@@ -1,5 +1,6 @@
 Role
-I'm Taishi Barth. I worked on the back end and created the question generator for the project.
+I'm Taishi Barth. I worked on the back end and created the question generator for the project,
+which represents the model.
 
 Planning Docs
 Before even thinking about code, we had project planning documents to formalize what exactly the
@@ -17,8 +18,8 @@ different parts of the project, which was useful for generalizing the structure 
 
 Reflection - What made the team proud?
 The obvious thing that made us proud was that we got something working and it's usable. Another
-thing is that we managed to finish our initial MVP early and had time to do another.  The current
-functionality is also something we thought was nice.
+thing is that we managed to finish our initial MVP early, so we had time to do another. The
+current functionality is also something we thought was nice.
 
 Reflection - The future
 For the future, I feel that there is a lot that would be relevent for working in a real work
