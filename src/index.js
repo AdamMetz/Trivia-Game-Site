@@ -261,7 +261,6 @@ app.post("/login", (req, res) => {
     } else {
         res.render("login.ejs", { invalid_input: true, logged_in: false });
     }
-
 });
 
 app.post("/logout", (req, res) => {
