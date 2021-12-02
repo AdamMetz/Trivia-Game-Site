@@ -1,9 +1,9 @@
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import express from "express";
-import session from "express-session"
+import session from "express-session";
 import mongoose from "mongoose";
-import passport from "passport"
-import passportLocalMongoose from "passport-local-mongoose"
+import passport from "passport";
+import passportLocalMongoose from "passport-local-mongoose";
 
 import { Xorshift, generateQuestions } from "./modules/generator.mjs";
 
@@ -32,7 +32,7 @@ app.use(passport.session());
 const userSchema = new mongoose.Schema({
     username: String,
     password: String
-})
+});
 
 userSchema.plugin(passportLocalMongoose);
 
@@ -52,7 +52,7 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-    res.render("home.ejs", { logged_in: islogged })
+    res.render("home.ejs", { logged_in: islogged });
 })
 
 app.get("/ingame", (req, res) => {
@@ -62,15 +62,15 @@ app.get("/ingame", (req, res) => {
         question_set_size: 10,
         question_text: result.questions[counter].text,
         curr_seconds: seconds
-    })
+    });
 });
 
 app.get("/login", (req, res) => {
-    res.render("login.ejs", { logged_in: islogged })
+    res.render("login.ejs", { logged_in: islogged });
 });
 
 app.get("/signup", (req, res) => {
-    res.render("signup.ejs", { logged_in: islogged, wrong_signup: false })
+    res.render("signup.ejs", { logged_in: islogged, wrong_signup: false });
 });
 
 app.get("/profile", async (req, res) => {
@@ -81,7 +81,7 @@ app.get("/profile", async (req, res) => {
             //Query all the users past quizzes, ordering from most recent date to oldest
             const pastquizzes = await Quizzes.find({ user: req.user.username }).sort({ date: -1 });
             //console.log( pastquizzes[0].questions[0] );
-            res.render("profile.ejs", { logged_in: islogged, username: req.user.username, quizzes: pastquizzes })
+            res.render("profile.ejs", { logged_in: islogged, username: req.user.username, quizzes: pastquizzes });
             //quizzes[entry number].date gives date .grade gives grade .score gives score
         } catch (error) {
             console.log(error);
@@ -101,7 +101,7 @@ app.get("/completed_game", (req, res) => {
         score: totalscore,
         question_number: req.query.question_number,
         total_seconds: seconds
-    })
+    });
     //questions[question number].text will giver give the question ex 2 + 2
     //questions[question number].userAnswer will give their answer
     //questions[question number].correctAnswer will give the right answer
@@ -116,7 +116,7 @@ app.post("/", (req, res) => {
     timer_end();
     if (req.body.grade_selection != "" && req.body.grade_selection != null && req.body.operation_selection != "" && req.body.operation_selection != null) {
         testarray = [];
-        console.log(req.body.operation_selection)
+        console.log(req.body.operation_selection);
         grade = req.body.grade_selection;
         mod = req.body.operation_selection;
         var quiz = new Object();
@@ -137,7 +137,7 @@ app.post("/", (req, res) => {
         res.redirect("/ingame");
     }
     else
-        res.redirect("/")
+        res.redirect("/");
 });
 
 app.post("/ingame", (req, res) => {
@@ -152,7 +152,7 @@ app.post("/ingame", (req, res) => {
             correct = false;
 
         test._id = counter;
-        test.arithmeticOperation = result.questions[counter].arithmeticOperation
+        test.arithmeticOperation = result.questions[counter].arithmeticOperation;
         test.text = result.questions[counter].text;
         test.userAnswer = answers;
         test.correctAnswer = result.questions[counter].answer;
@@ -171,7 +171,7 @@ app.post("/ingame", (req, res) => {
                     selectedTypes: mod,
                     score: totalscore,
                     questions: [testarray[0], testarray[1], testarray[2], testarray[3], testarray[4], testarray[5], testarray[6], testarray[7], testarray[8], testarray[9]]
-                })
+                });
                 quizzes.save();
             }
             res.redirect("/completed_game");
@@ -180,7 +180,7 @@ app.post("/ingame", (req, res) => {
             res.redirect("/ingame");
     }
     else
-        res.redirect("/ingame")
+        res.redirect("/ingame");
 });
 
 app.post("/signup", (req, res) => {
