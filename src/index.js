@@ -1,21 +1,23 @@
+import dotenv from "dotenv"
 import express from "express";
-const app = express();
+import session from "express-session"
+import mongoose from "mongoose";
+import passport from "passport"
+import passportLocalMongoose from "passport-local-mongoose"
 
+import { Xorshift, generateQuestions } from "./modules/generator.mjs";
+
+const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-import mongoose from "mongoose";
 mongoose.connect(
     "mongodb://localhost:27017/MathBlitz",
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
-import session from "express-session"
-import passport from "passport"
-import passportLocalMongoose from "passport-local-mongoose"
-import dotenv from "dotenv"
 dotenv.config();
 
 app.use(session({
@@ -257,8 +259,6 @@ app.post("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
 });
-
-import { Xorshift, generateQuestions } from "./modules/generator.mjs";
 
 var grade;
 var mod;
