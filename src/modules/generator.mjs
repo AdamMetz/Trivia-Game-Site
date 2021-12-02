@@ -23,8 +23,6 @@
 // The function randomInteger contains licensed material
 // More details can be found above the function in question
 
-import { text } from "express";
-
 const questionGenerators = {
     addition: generateAddition,
     subtraction: generateSubtraction,
