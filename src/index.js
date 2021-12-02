@@ -126,14 +126,13 @@ app.get("/completed_game", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-    if (req.isAuthenticated()) {
-        islogged = true;
-    }
+    islogged = req.isAuthenticated();
     timer_end();
-    if (req.body.grade_selection != "" && req.body.grade_selection != null && req.body.operation_selection != "" && req.body.operation_selection != null) {
+
+    const grade = req.body.grade_selection;
+    mod = req.body.operation_selection;
+    if (grade !== undefined && mod !== undefined) {
         testarray = [];
-        const grade = req.body.grade_selection;
-        mod = req.body.operation_selection;
         const quiz = {
             grade: grade,
             operations: (mod === "string") ? [mod] : mod
@@ -152,7 +151,7 @@ app.post("/", (req, res) => {
 });
 
 app.post("/ingame", (req, res) => {
-    if (req.body.answer != "" && req.body.answer != null) {
+    if (req.body.answer !== "") {
         const inputAnswer = +req.body.answer;
         const currentQuestion = result.questions[counter];
         const correct = inputAnswer === currentQuestion.answer;
@@ -174,7 +173,7 @@ app.post("/ingame", (req, res) => {
         if (counter === 10) {
             timer_end();
             const totalscore = (totalcorrect * 10);
-            if (islogged === true) {
+            if (islogged) {
                 const quizzes = new Quizzes({
                     user: req.user.username,
                     date: Date(),
@@ -205,18 +204,18 @@ app.post("/signup", (req, res) => {
     if (req.body.password.length < 8 || req.body.password.length > 20) {
         error_list.push("Invalid Password Length");
     }
-    if (req.body.password != req.body.confirm_password) {
+    if (req.body.password !== req.body.confirm_password) {
         console.log(req.body.password);
         console.log(req.body.confirm_password);
         error_list.push("Password Mismatch");
     }
-    if (regex.test(req.body.username) == false) {
+    if (regex.test(req.body.username)) {
         error_list.push("Username Contains Illegal Characters");
     }
-    if (regex.test(req.body.password) == false) {
+    if (regex.test(req.body.password)) {
         error_list.push("Password Contains Illegal Characters");
     }
-    if (error_list.length != 0) {
+    if (error_list.length !== 0) {
         res.render("signup.ejs", { logged_in: islogged, error_list: error_list });
     } else {
         User.register(
@@ -243,7 +242,7 @@ app.post("/signup", (req, res) => {
 
 app.post("/login", (req, res) => {
     console.log(`User ${req.body.username} is attempting to log in`);
-    if (req.body.password.length != 0 && req.body.username.length != 0) {
+    if (req.body.password.length !== 0 && req.body.username.length !== 0) {
         const user = new User({
             username: req.body.username,
             password: req.body.password
