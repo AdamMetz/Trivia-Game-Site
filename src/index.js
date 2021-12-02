@@ -97,7 +97,11 @@ app.get("/profile", async (req, res) => {
             console.log("was authorized and found:");
             // Query all the users past quizzes, ordering from most recent date to oldest
             const pastquizzes = await Quizzes.find({ user: req.user.username }).sort({ date: -1 });
-            res.render("profile.ejs", { logged_in: islogged, username: req.user.username, quizzes: pastquizzes });
+            res.render("profile.ejs", {
+                logged_in: islogged,
+                username: req.user.username,
+                quizzes: pastquizzes
+            });
             // quizzes[entry number].date gives date .grade gives grade .score gives score
         } catch (error) {
             console.log(error);
