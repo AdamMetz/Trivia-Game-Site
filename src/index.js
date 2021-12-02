@@ -18,6 +18,25 @@ mongoose.connect(
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
+const quizzesSchema = new mongoose.Schema({
+    user: String,
+    date: Date,
+    timeTaken: Number,
+    grade: Number,
+    selectedTypes: Array,
+    score: Number,
+    questions: [{
+        _id: Number,
+        arithmeticOperation: String,
+        text: String,
+        userAnswer: Number,
+        correctAnswer: Number,
+        correct: Boolean
+    }]
+});
+
+const Quizzes = new mongoose.model("quizzes", quizzesSchema);
+
 dotenv.config();
 
 app.use(session({
@@ -269,25 +288,6 @@ var correct;
 var totalcorrect;
 var testarray = [];
 var islogged = false;
-
-const quizzesSchema = new mongoose.Schema({
-    user: String,
-    date: Date,
-    timeTaken: Number,
-    grade: Number,
-    selectedTypes: Array,
-    score: Number,
-    questions: [{
-        _id: Number,
-        arithmeticOperation: String,
-        text: String,
-        userAnswer: Number,
-        correctAnswer: Number,
-        correct: Boolean
-    }]
-});
-
-const Quizzes = new mongoose.model("quizzes", quizzesSchema);
 
 var seconds = 0;
 var timer;
