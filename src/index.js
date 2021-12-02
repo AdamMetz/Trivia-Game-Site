@@ -1,21 +1,21 @@
-import express from 'express';
+import express from "express";
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-app.set('views', 'views');
+app.set("views", "views");
 
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 mongoose.connect(
     "mongodb://localhost:27017/MathBlitz",
     { useNewUrlParser: true, useUnifiedTopology: true }
 );
 
-import session from 'express-session'
-import passport from 'passport'
-import passportLocalMongoose from 'passport-local-mongoose'
-import dotenv from 'dotenv'
+import session from "express-session"
+import passport from "passport"
+import passportLocalMongoose from "passport-local-mongoose"
+import dotenv from "dotenv"
 dotenv.config();
 
 app.use(session({
@@ -92,7 +92,7 @@ app.get("/profile", async (req, res) => {
 
 
 app.get("/completed_game", (req, res) => {
-    var totalscore = String((totalcorrect / 10) * 100) + "% (" + totalcorrect + "/10)";
+    var totalscore = `${totalcorrect * 10}% (${totalcorrect}/10)`;
     res.render("completed_game.ejs", {
         logged_in: islogged,
         questions: testarray,
@@ -126,7 +126,7 @@ app.post("/", (req, res) => {
         console.log(quiz.operations);
         quiz.grade = grade;
         const seed = Date.now() | 1;
-        console.log("Seed: " + seed);
+        console.log(`Seed: ${seed}`);
         const generator = new Xorshift(seed);
         result = generateQuestions(quiz, generator);
         counter = 0;
@@ -182,7 +182,7 @@ app.post("/ingame", (req, res) => {
 });
 
 app.post("/signup", (req, res) => {
-    console.log("User " + req.body.username + " is attempting to register");
+    console.log(`User ${req.body.username} is attempting to register`);
     var regex = /^[a-zA-Z0-9]+$/;
     let error_list = [];
     if (req.body.username.length < 3 || req.body.username.length > 20) {
@@ -228,7 +228,7 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    console.log("User " + req.body.username + " is attempting to log in");
+    console.log(`User ${req.body.username} is attempting to log in`);
     if (req.body.password.length != 0 && req.body.username.length != 0) {
         const user = new User({
             username: req.body.username,
