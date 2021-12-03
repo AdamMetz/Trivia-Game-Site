@@ -213,13 +213,14 @@ app.post("/signup", (req, res) => {
         console.log(req.body.confirm_password);
         error_list.push("Password Mismatch");
     }
-    if (regex.test(req.body.username)) {
+    if (!regex.test(req.body.username)) {
         error_list.push("Username Contains Illegal Characters");
     }
-    if (regex.test(req.body.password)) {
+    if (!regex.test(req.body.password)) {
         error_list.push("Password Contains Illegal Characters");
     }
     if (error_list.length !== 0) {
+        console.log(error_list);
         res.render("signup.ejs", { logged_in: islogged, error_list: error_list });
     } else {
         User.register(
