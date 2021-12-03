@@ -199,24 +199,25 @@ app.post("/ingame", (req, res) => {
 });
 
 app.post("/signup", (req, res) => {
-    console.log(`User ${req.body.username} is attempting to register`);
+    const username = req.body.username;
+    const password = req.body.password;
+    console.log(`User ${username} is attempting to register`);
+
     const regex = /^[a-zA-Z0-9]+$/;
     let error_list = [];
-    if (req.body.username.length < 3 || req.body.username.length > 20) {
+    if (username.length < 3 || username.length > 20) {
         error_list.push("Invalid Username Length");
     }
-    if (req.body.password.length < 8 || req.body.password.length > 20) {
+    if (password.length < 8 || password.length > 20) {
         error_list.push("Invalid Password Length");
     }
-    if (req.body.password !== req.body.confirm_password) {
-        console.log(req.body.password);
-        console.log(req.body.confirm_password);
+    if (password !== req.body.confirm_password) {
         error_list.push("Password Mismatch");
     }
-    if (!regex.test(req.body.username)) {
+    if (!regex.test(username)) {
         error_list.push("Username Contains Illegal Characters");
     }
-    if (!regex.test(req.body.password)) {
+    if (!regex.test(password)) {
         error_list.push("Password Contains Illegal Characters");
     }
     if (error_list.length !== 0) {
@@ -224,15 +225,15 @@ app.post("/signup", (req, res) => {
         res.render("signup.ejs", { logged_in: false, error_list: error_list });
     } else {
         User.register(
-            { username: req.body.username },
-            req.body.password,
+            { username: username },
+            password,
             (err, user) => {
                 if (err) {
                     console.log(err);
                     res.render("signup.ejs", {
                         logged_in: false,
                         db_error: true,
-                        taken_username: req.body.username
+                        taken_username: username
                     });
                 } else {
                     passport.authenticate("local")(req, res, () => {
@@ -245,11 +246,13 @@ app.post("/signup", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    console.log(`User ${req.body.username} is attempting to log in`);
-    if (req.body.password.length !== 0 && req.body.username.length !== 0) {
+    const username = req.body.username;
+    const password = req.body.password;
+    console.log(`User ${username} is attempting to log in`);
+    if (password.length !== 0 && username.length !== 0) {
         const user = new User({
-            username: req.body.username,
-            password: req.body.password
+            username: username,
+            password: password
         });
         req.login(user, (err) => {
             if (err) {
