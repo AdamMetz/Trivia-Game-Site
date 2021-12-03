@@ -69,12 +69,12 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-    res.render("home.ejs", { logged_in: islogged });
+    res.render("home.ejs", { logged_in: req.isAuthenticated() });
 })
 
 app.get("/ingame", (req, res) => {
     res.render("ingame.ejs", {
-        logged_in: islogged,
+        logged_in: req.isAuthenticated(),
         curr_question_num: (counter + 1),
         question_set_size: 10,
         question_text: result.questions[counter].text,
@@ -83,22 +83,23 @@ app.get("/ingame", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.render("login.ejs", { logged_in: islogged });
+    res.render("login.ejs", { logged_in: req.isAuthenticated() });
 });
 
 app.get("/signup", (req, res) => {
-    res.render("signup.ejs", { logged_in: islogged, wrong_signup: false });
+    res.render("signup.ejs", { logged_in: req.isAuthenticated(), wrong_signup: false });
 });
 
 app.get("/profile", async (req, res) => {
     console.log("A user is accessing the reviews route using get, and...");
-    if (req.isAuthenticated()) {
+    const isLoggedIn = req.isAuthenticated();
+    if (isLoggedIn) {
         try {
             console.log("was authorized and found:");
             // Query all the users past quizzes, ordering from most recent date to oldest
             const pastquizzes = await Quizzes.find({ user: req.user.username }).sort({ date: -1 });
             res.render("profile.ejs", {
-                logged_in: islogged,
+                logged_in: isLoggedIn,
                 username: req.user.username,
                 quizzes: pastquizzes
             });
@@ -116,7 +117,7 @@ app.get("/profile", async (req, res) => {
 app.get("/completed_game", (req, res) => {
     const totalscore = `${totalcorrect * 10}% (${totalcorrect}/10)`;
     res.render("completed_game.ejs", {
-        logged_in: islogged,
+        logged_in: req.isAuthenticated(),
         questions: testarray,
         score: totalscore,
         question_number: req.query.question_number,
@@ -130,7 +131,6 @@ app.get("/completed_game", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-    islogged = req.isAuthenticated();
     timer_end();
 
     const grade = req.body.grade_selection;
@@ -177,7 +177,7 @@ app.post("/ingame", (req, res) => {
         if (counter === 10) {
             timer_end();
             const totalscore = (totalcorrect * 10);
-            if (islogged) {
+            if (req.isAuthenticated()) {
                 const quizzes = new Quizzes({
                     user: req.user.username,
                     date: Date(),
@@ -221,7 +221,7 @@ app.post("/signup", (req, res) => {
     }
     if (error_list.length !== 0) {
         console.log(error_list);
-        res.render("signup.ejs", { logged_in: islogged, error_list: error_list });
+        res.render("signup.ejs", { logged_in: false, error_list: error_list });
     } else {
         User.register(
             { username: req.body.username },
@@ -230,13 +230,12 @@ app.post("/signup", (req, res) => {
                 if (err) {
                     console.log(err);
                     res.render("signup.ejs", {
-                        logged_in: islogged,
+                        logged_in: false,
                         db_error: true,
                         taken_username: req.body.username
                     });
                 } else {
                     passport.authenticate("local")(req, res, () => {
-                        islogged = true;
                         res.redirect("/");
                     });
                 }
@@ -258,7 +257,6 @@ app.post("/login", (req, res) => {
                 res.redirect("/login");
             } else {
                 passport.authenticate("local")(req, res, () => {
-                    islogged = true;
                     res.redirect("/");
                 });
             }
@@ -270,7 +268,6 @@ app.post("/login", (req, res) => {
 
 app.post("/logout", (req, res) => {
     console.log("A user is logging out");
-    islogged = false;
     req.logout();
     res.redirect("/");
 });
@@ -280,7 +277,6 @@ let counter;
 let result;
 let totalcorrect;
 let testarray = [];
-let islogged = false;
 
 let seconds = 0;
 let timer;
