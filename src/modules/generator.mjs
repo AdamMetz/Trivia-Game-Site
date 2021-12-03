@@ -51,14 +51,12 @@ function generateQuestions(options, generator) {
     const questions = new Array(numberOfQuestions);
 
     for (let i = 0; i < numberOfQuestions; i++) {
-        questions[i] = new Object();
-        const question = questions[i];
         const arithmeticOperation = operations[randomInteger(0, operations.length, generator)];
-        question.arithmeticOperation = arithmeticOperation;
-        ({ text: question.text, answer: question.answer } = questionGenerators[arithmeticOperation](grade, generator));
+        const { text, answer } = questionGenerators[arithmeticOperation](grade, generator);
+        questions[i] = { arithmeticOperation: arithmeticOperation, text: text, answer: answer };
     }
 
-    return {grade: grade, questions: questions};
+    return { grade: grade, questions: questions };
 }
 
 // Implements the standard xorshift algorithm with 32 bits of state
